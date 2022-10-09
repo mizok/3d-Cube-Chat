@@ -1,0 +1,14 @@
+/// Breakpoints map
+/// 網頁的breakpoint 其實不只有固定的1024/768/375 那幾種, 現行前端界常用的breakpoint 大多都是來自於知名框架的定義或主流device的長寬度
+/// 因此有些非主流廠牌的device就常有可能會被忽略掉，這邊我們紀錄的是目前前端界常見的一些breakpoint
+
+$screen-pad-pro-landscape: 1366px !default; //ipad pro 的橫式寬度
+$screen-bs-extra-large-desktop: 1200px !default; //Bootstrap 3定義的超大型桌上裝置寬度
+$screen-pad-landscape: 1024px !default; //一般ipad的橫式寬度
+$screen-bs-large: 992px !default; //Bootstrap 3定義的大型桌上裝置寬度
+$screen-pad-portrait: 768px !default; //一般ipad的直式寬度
+$screen-bs-phone-landscape: 576px !default; //Bootstrap 3定義的一般手機橫式寬度
+$screen-normal-phone-portrait: 480px !default; // 公司內部自行定義的平均手機寬度值
+$screen-small-phone: 320px !default; // iphone 5的直式寬度
+
+

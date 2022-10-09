@@ -1,0 +1,294 @@
+@import './main';
+
+
+  * {
+    padding: 0;
+    margin: 0;
+    font-family: $text-font-stack;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /********************* global reset End*********************/
+
+  /********************* main HTML Structure reset Start*********************/
+
+  html {
+    line-height: 1.15;
+    /* 1 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
+    -ms-text-size-adjust: 100%;
+    /* 3 */
+  }
+
+  body {
+    line-height: 1;
+    color: black;
+  }
+
+  html,
+  body {
+    height: 100%;
+    box-sizing: border-box;
+    -ms-overflow-style: scrollbar;
+  }
+
+  main {
+    display: block;
+  }
+
+  article,
+  aside,
+  footer,
+  header,
+  nav,
+  section,
+  figcaption,
+  figure {
+    display: block;
+  }
+
+  /********************* main HTML Structure reset End*********************/
+
+  /********************* Secondary HTML Element reset Start*********************/
+
+  /* tables still need 'cellspacing="0"' in the markup */
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    caption,
+    th,
+    td {
+      text-align: left;
+      font-weight: normal;
+    }
+
+    th,
+    td {
+      vertical-align: top;
+    }
+  }
+
+  // ordered-list,unordered-list reset
+
+  ol,
+  ul {
+    list-style: none;
+  }
+
+  // paragraph reset
+
+  p {
+    color: $text-color;
+  }
+
+  // pre-render reset
+
+  pre {
+    font-family: $text-font-stack;
+    /* 1 */
+    font-size: 1em;
+    /* 2 */
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /**
+      * 1. Add the correct box sizing in Firefox.
+      * 2. Show the overflow in Edge and IE.
+      */
+
+  hr {
+    box-sizing: content-box;
+    /* 1 */
+    height: 0;
+    /* 1 */
+    overflow: visible;
+    /* 2 */
+  }
+
+  /**
+    * Remove the gray background on active links in IE 10.
+    * Set display : inline-block as default.
+    */
+
+  a {
+    background-color: transparent;
+    display: inline-block;
+    color: $link-color;
+    text-decoration: none;
+    -webkit-text-decoration-skip: objects;
+
+    /* 2 */
+    @include on-event {
+      color: $text-color;
+      text-decoration: underline;
+    }
+
+    &[href] {
+      cursor: pointer;
+    }
+  }
+
+  /**
+    * Add the correct font weight in Chrome, Edge, and Safari.
+    */
+
+  b,
+  strong {
+    font-weight: bolder;
+  }
+
+  blockquote,
+  q {
+    quotes: none;
+
+    &:before,
+    &:after {
+      content: "";
+      content: none;
+    }
+  }
+
+  /**
+    * Remove the border on images inside links in IE 10.
+    */
+
+  img {
+    border-style: none;
+    display: inline-block;
+    width: 100%;
+  }
+
+  /**
+    * Hide the overflow in IE.
+    */
+
+  svg:not(:root) {
+    overflow: hidden;
+  }
+
+  /**
+    * 1. Change the font styles in all browsers.
+    * 2. Remove the margin in Firefox and Safari.
+    */
+
+  /********************* Secondary HTML Element reset End*********************/
+
+  /******************** Form Element Reset Start********************/
+
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+    /* 1 */
+    font-size: 100%;
+    /* 1 */
+    line-height: 1.15;
+    /* 1 */
+    margin: 0;
+    /* 2 */
+    text-transform: none;
+  }
+
+  textarea {
+    overflow: auto;
+    resize: none;
+
+    &:invalid {
+      box-shadow: none;
+    }
+  }
+
+  select {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  input {
+
+    &:invalid {
+      box-shadow: none;
+    }
+
+    &[type="password"]::-ms-reveal,
+    &[type=""]::-ms-clear {
+      display: none;
+    }
+
+    &:-webkit-input-placeholder,
+    &:-ms-input-placeholder,
+    &::-ms-input-placeholder,
+    &::placeholder {
+      font: inherit;
+    }
+
+    &[type="checkbox"],
+    &[type="radio"] {
+      box-sizing: border-box;
+      /* 1 */
+      padding: 0;
+      /* 2 */
+    }
+
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
+      height: auto;
+    }
+
+    &[type="search"]::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+  }
+
+  [type="button"],
+  /* 1 */
+  [type="reset"],
+  [type="submit"] {
+    -webkit-appearance: button;
+    /* 2 */
+  }
+
+  label[for] {
+    cursor: pointer;
+  }
+
+  legend {
+    color: inherit;
+    /* 2 */
+    display: table;
+    /* 1 */
+    max-width: 100%;
+    /* 1 */
+    padding: 0;
+    /* 3 */
+    white-space: normal;
+    /* 1 */
+  }
+
+  /******************** Form Element Reset End********************/
+
+  template {
+    display: none;
+  }
+
+  
+/********************* global reset Start*********************/

@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+
+//平方根
+@function sqrt($r) {
+  $x0: 1; // initial value
+  $solution: false;
+
+  @for $i from 1 through 10 {
+    @if abs(2 * $x0) < 0.00000000000001 {
+      // Don't want to divide by a number smaller than this
+      $solution: false;
+    }
+
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0) !global;
+
+    @if (abs($x1 - $x0) / abs($x1)) < 0.0000001 {
+      // 7 digit accuracy is desired
+      $solution: true;
+    }
+
+    $x0: $x1;
+  }
+
+  @if $solution==true {
+
+    // If $r is negative, then the output will be multiplied with <a href="http://en.wikipedia.org/wiki/Imaginary_number">i = √-1</a>
+    // (√xy = √x√y) => √-$r = √-1√$r
+    @if $r < 0 {
+      @return $x1 #{i};
+    }
+
+    @else {
+      @return $x1;
+    }
+  }
+
+  @else {
+    @return "No solution";
+  }
+}
+
+//白化顏色用的function
+@function diluter($color, $rate) {
+  $color-0: mix($color, #fff, $rate);
+  @return $color-0;
+}
+
+//px轉換單位成rem用的function
+@function pxToRem($size, $base:16px) {
+  $remSize: $size / $base;
+  //Default font size on html element is 100%, equivalent to 16px;
+  @return #{$remSize}rem;
+}

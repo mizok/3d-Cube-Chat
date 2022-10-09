@@ -1,0 +1,41 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate" />
+  <meta name="format-detection" content="telephone=no">
+  <title><%= title%></title>
+  <% const description = 'site description'%>
+  <% const url = 'site url' %>
+  <% const author = 'site author'%>
+  <% const openGraphImageUrl = 'https://www.google.com'%>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="chrome" content="notranslate">
+  <meta name="description" content="<%= description%>" />
+  <meta name="author" content="<%= author%>">
+  <meta property="og:title" content="<%= title%>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= url%>">
+  <meta property="og:image" content="<%= openGraphImageUrl%>">
+  <meta property="og:site_name" content="<%= title%>">
+  <meta property="og:description" content="<%= description%>">
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="<%= url%>" />
+  <meta name="twitter:title" content="<%= title%>" />
+  <meta name="twitter:description" content="<%= description%>" />
+  <meta name="twitter:image" content="<%= openGraphImageUrl%>" />
+  <meta name="twitter:url" content="<%= url%>" />
+  <meta itemprop="name" content="<%= title%>">
+  <meta itemprop="description" content="<%= description%>">
+  <meta itemprop="image" content="<%= openGraphImageUrl%>">
+  <title><%= title%></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
+  <%- include('./ga.ejs')%>
+</head>

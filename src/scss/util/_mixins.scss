@@ -1,0 +1,381 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// @example 若某元素有滑鼠互動特效時導入
+/// @param {Bool} $self [false] - 當值為 false時，不將本身納入樣式有效對象, 也就是說當值為true時, compile出來的css會是 .element,.element:hover,element:active,.element:focus{...}
+@mixin on-event($self: false) {
+  @if $self {
+
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+
+  @else {
+
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+/// @example 單行字數若溢出容器最大寬度，將超出的字轉換為...
+/// @param {None} none
+@mixin text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/// @example 多行字數若溢出容器最大尺寸，將超出的字轉換為...(IE無效)
+/// @param {Num} howManyLine 參數請填段落最大行數(整數)
+@mixin multi-line-ellipsis($how-many-line: 3) {
+  display: -webkit-box;
+  -webkit-line-clamp: $how-many-line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/// @example 將字體大小的px單位轉換為Rem單位
+/// @param {Num} size 參數請填瀏覽器字體需要成為的字體大小(數字)
+/// @param {Num} base 參數請填瀏覽器字體基準大小(數字)
+@mixin px-to-rem($size: 16, $base: 16) {
+  font-size: $size; // fallback for old browsers
+  font-size: $size / $base * 1rem;
+}
+
+/// @example 快速創建固定間距寬度(寬度可為各種長度單位)的flex grid system
+/// @param {Num} column-number 參數請填數字，grid欄數
+/// @param {Size} column-gutter 參數請填長度單位(px,rem,em,%,vw,...,etc), grid容器內部子容器的水平間距
+/// @param {Size} vertical-gutter 參數請填長度單位(px,rem,em,%,vw,...,etc), grid容器內部子容器的垂直間距, 預設等於column-gutter
+/// @param {String} grid-child-selector 參數請填gird容器內部子容器想要的class名稱, 預設為'*'
+/// @param {String} max-width 參數請填長度單位，gird容器的最大寬度
+/// @param {Size} box-sizing-fix 這個變數是為了要應對在Ie的flex bug, IE在flex-basis為純值的狀況下
+/// 會忽略掉boxing-sizing:border-box的設定，因此padding和border並不會被計算在flex-basis的範圍內，變成必須要手動扣除，這邊請填寫padding-left/padding-right ＆ border-left/border-right的總和
+/// @param {String} min-screen-width 參數請填長度單位，呈現出這個 mixin 參數所導出的grid樣式時，其最小視窗寬度，預設為0
+@mixin fixed-gutter-flex-grid($column-number: 3,
+  $column-gutter: 30px,
+  $vertical-gutter: $column-gutter,
+  $grid-child-selector: "*",
+  $box-sizing-fix:0px,
+  $max-width: 100%,
+  $min-screen-width: 0px,
+  $max-screen-width: 999999px) {
+  @media screen and (min-width: $min-screen-width) and (max-width: $max-screen-width) {
+    width: 100%;
+    display: inline-flex;
+    max-width: $max-width;
+    font-size: 0;
+    flex-wrap: wrap;
+
+    >#{$grid-child-selector} {
+      display: inline-block;
+      flex: none;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: calc((100% - (#{$column-number} - 1) * #{$column-gutter}) /#{$column-number});
+      width: calc((100% - (#{$column-number} - 1) * #{$column-gutter}) /#{$column-number});
+      margin-right: #{$column-gutter};
+      margin-bottom: #{$vertical-gutter};
+
+      &:nth-child(#{$column-number}n) {
+        margin-right: 0;
+      }
+
+      // @for $i from 1 through $column-number {
+      //   &:nth-last-child(#{$i}) {
+      //     margin-bottom: 0;
+      //   }
+      // }
+
+    }
+  }
+
+  @media all and (-ms-high-contrast: none) and (min-width: $min-screen-width) and (max-width: $max-screen-width) {
+    >#{$grid-child-selector} {
+      flex-basis: calc(((99.99% - (#{$column-number} - 1) * #{$column-gutter}) /#{$column-number}) - #{$box-sizing-fix});
+      width: calc(((99.99% - (#{$column-number} - 1) * #{$column-gutter}) /#{$column-number}) - #{$box-sizing-fix});
+    }
+
+  }
+}
+
+/// @example 快速創建固定欄位寬度(寬度可為各種長度單位)的flex grid system
+/// @param {Num} column-number 參數請填數字，grid欄數
+/// @param {Size} vertical-gutter 參數請填長度單位(px,rem,em,%,vw,...,etc), gird容器內部子容器的垂直間距
+/// @param {Size} column-width 參數請填長度單位(px,rem,em,%,vw,...,etc), gird容器內部子容器的固定寬度
+/// @param {String} grid-child-selector 參數請填gird容器內部子容器想要的class名稱, 預設為'*'
+/// @param {Size} box-sizing-fix 這個變數是為了要應對在Ie的flex bug, IE在flex-basis為純值的狀況下
+/// 會忽略掉boxing-sizing:border-box的設定，因此padding和border並不會被計算在flex-basis的範圍內，變成必須要手動扣除，這邊請填寫padding-left/padding-right ＆ border-left/border-right的總和
+/// @param {String} max-width 參數請填長度單位，gird容器的最大寬度
+/// @param {String} min-screen-width 參數請填長度單位。呈現出這個 mixin 參數所導出的grid樣式時，其最小視窗寬度，預設為0
+
+@mixin fixed-column-flex-grid($column-number: 3,
+  $column-width: 50px,
+  $vertical-gutter: 30px,
+  $grid-child-selector: "*",
+  $max-width: 100%,
+  $box-sizing-fix:0px,
+  $min-screen-width: 0px,
+  $max-screen-width: 9999999px) {
+  $gutter-num: ($column-number - 1);
+
+  @media screen and (min-width:#{$min-screen-width}) and (max-width:#{$max-screen-width}) {
+    width: 100%;
+    display: inline-flex;
+    max-width: #{$max-width};
+    font-size: 0;
+    flex-wrap: wrap;
+
+    >#{$grid-child-selector} {
+      display: inline-block;
+      flex: none;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: #{$column-width};
+      width: #{$column-width};
+      margin-right: calc((100% - #{$column-number} * #{$column-width}) / #{$gutter-num});
+      margin-bottom: #{$vertical-gutter};
+
+      &:nth-child(#{$column-number}n) {
+        margin-right: 0;
+      }
+
+      // @for $i from 1 through $column-number {
+      //   &:nth-last-child(#{$i}) {
+      //     margin-bottom: 0;
+      //   }
+      // }
+    }
+  }
+
+  ///修正ie異常狀況
+  @media screen and (-ms-high-contrast: none) and (min-width:#{$min-screen-width}) and (max-width:#{$max-screen-width}) {
+    >#{$grid-child-selector} {
+      margin-right: calc((99.99% - #{$column-number} * #{$column-width}) / #{$gutter-num});
+      flex-basis: calc(#{$column-width} - #{$box-sizing-fix});
+      width: calc(#{$column-width} - #{$box-sizing-fix});
+
+    }
+  }
+}
+
+/// @example 快速創建CSS border 三角形
+/// @param {String}
+
+@mixin gen-triangle($orientation: "top", $arrow-width: 15px, $arrow-size: 20px, $arrow-color: #000) {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0;
+  border-color: transparent;
+  display: inline-block;
+
+  @if ($orientation=="left") {
+    border-width: $arrow-width $arrow-size $arrow-width 0;
+    border-right-color: $arrow-color;
+  }
+
+  @else if($orientation=="right") {
+    border-width: $arrow-width 0 $arrow-size $arrow-width;
+    border-left-color: $arrow-color;
+  }
+
+  @else if($orientation=="top") {
+    border-width: 0 $arrow-width $arrow-size $arrow-width;
+    border-bottom-color: $arrow-color;
+  }
+
+  @else if($orientation=="bottom") {
+    border-width: $arrow-width $arrow-size 0 $arrow-width;
+    border-top-color: $arrow-color;
+  }
+}
+
+/// @example 快速創建CSS 半圓形
+/// @param {String} diameter 參數請填寬度(px)
+
+@mixin semi-circle-btm($diameter: 30px) {
+  height: $diameter/2;
+  width: $diameter;
+  border-radius: 0 0 $diameter $diameter;
+  padding: 0;
+}
+
+/// @example 快速創建禁用樣式
+/// @param {String} opacity 參數請填透明度小數
+
+@mixin status-disable($opacity: 0.3) {
+  cursor: not-allowed;
+  opacity: $opacity;
+
+  * {
+    pointer-events: none !important;
+  }
+}
+
+/// @example 上下左右箭頭
+/// @param {String} $arrow-type 參數請填箭頭方向名稱，預設為'down'
+/// @param {Color} $arrow-border-color 參數請填箭頭顏色
+@mixin arrow($arrow-type: down, $arrow-border-color: 2px solid #f09813) {
+  display: block;
+  position: relative;
+  cursor: pointer;
+
+  &:after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-right: transparent;
+    border-top: transparent;
+    border-bottom: $arrow-border-color;
+    border-left: $arrow-border-color;
+  }
+
+  @if $arrow-type==down {
+    &:after {
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
+
+  @else if $arrow-type==top {
+    &:after {
+      transform: translateY(-50%) rotate(135deg);
+    }
+  }
+
+  @else if $arrow-type==right {
+    &:after {
+      transform: translateY(-50%) rotate(225deg);
+    }
+  }
+
+  @else if $arrow-type==left {
+    &:after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+  }
+
+  @else {
+    @error "請填寫$arrow-type正確參數：top／left／bottom／right";
+  }
+}
+
+/// @example 製作圓角方塊
+/// @param {Size} $width 參數請填寬度，預設為'27px'
+/// @param {Size} $height 參數請填高度，預設為'27px'
+/// @param {Size} $border-radius 參數請填圓角，預設為'0px 0 5px 0'
+/// @param {Color} $background 參數請填背景顏色
+
+@mixin squareArrow($width: 27px, $height: 27px, $border-radius: 0px 0 5px 0, $background: #f09813) {
+  width: $width;
+  height: $height;
+  border-radius: $border-radius;
+  background: $background;
+}
+
+/// @example 製作圓形
+/// @param {Size} $circle-size 參數請填圓形設定尺寸(寬/高/行高設定均相同)，預設為'75px'
+/// @param {Size} $background 參數請填背景顏色
+
+@mixin circle($circle-size: 75px, $background: #f09813) {
+  border-radius: 50%;
+  width: $circle-size;
+  height: $circle-size;
+  line-height: $circle-size;
+  background: $background;
+}
+
+
+/// @example 製作叉叉
+/// @param {Size} $block-width 參數請填產生叉叉的方塊的寬
+/// @param {Size} $block-height 參數請填產生叉叉的方塊的高
+/// @param {Size} $line-width:2px 參數請填叉叉的線寬
+/// @param {Size} $line-length:80% 參數請填叉叉的線長
+/// @param {Color} $line-color 參數請填叉叉的線色
+
+@mixin genCross($block-width:50px, $block-height:50px, $line-width:2px, $line-length:80%, $line-color:green) {
+  position: relative;
+  width: $block-width;
+  height: $block-height;
+
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    height: $line-length;
+    width: $line-width;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 50%;
+    background-color: $line-color;
+    transform-origin: 50% 50%;
+  }
+
+  &:after {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  &:before {
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+
+
+@mixin flex-width($width:0px, $box-sizing-fix:0px) {
+  flex-basis: $width;
+  width: $width;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  @media all and (-ms-high-contrast: none) {
+    flex-basis: calc(#{$width} - #{$box-sizing-fix});
+  }
+}
+
+@mixin flex-height($height:0px, $box-sizing-fix:0px) {
+  flex-basis: $height;
+  height: $height;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  @media all and (-ms-high-contrast: none) {
+    flex-basis: calc(#{$height} - #{$box-sizing-fix});
+  }
+}
+
+/// @example 快速創建Device Width Media Query規則
+/// @param {String} $breakpoint 參數請填長度單位，裝置斷點寬度
+
+@mixin rwd($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+
+@mixin min-rwd($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+
+@mixin between-rwd($min-screen-width, $max-screen-width) {
+  @media screen and (min-width:$min-screen-width) and (max-width: $max-screen-width) {
+    @content;
+  }
+}

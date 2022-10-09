@@ -1,0 +1,64 @@
+{
+  "name": "webpack_playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack --config webpack.config.ts --mode production",
+    "dev": "npx cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack serve --config webpack.config.ts  --mode development",
+    "deploy": "npm run build && npx gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizok/webpack_playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mizok/webpack_playground/issues"
+  },
+  "homepage": "https://github.com/mizok/webpack_playground#readme",
+  "devDependencies": {
+    "@babel/plugin-syntax-top-level-await": "^7.14.5",
+    "@types/gsap": "^3.0.0",
+    "@types/lodash": "^4.14.186",
+    "@types/three": "^0.144.0",
+    "@types/webpack-dev-server": "^4.7.2",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^9.0.1",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
+    "ejs": "^3.1.6",
+    "gh-pages": "^3.2.3",
+    "html-loader": "^3.0.1",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.5.0",
+    "postcss-loader": "^5.2.0",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "^1.33.0",
+    "sass-loader": "^12.0.0",
+    "style-loader": "^2.0.0",
+    "template-ejs-loader": "latest",
+    "terser-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0",
+    "typescript": "^4.5.5",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.8",
+    "gsap": "^3.11.3",
+    "lodash": "^4.17.21",
+    "three": "^0.145.0"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "IE 10"
+  ]
+}
