@@ -32,13 +32,14 @@ const getCubeTexture = (source: any) => {
 		cubeTextureLoader.load(
 			source.paths,
 			(texture) => {
+				console.log(texture)
 				res({
 					name: source.name,
 					content: texture
 				});
 			},
 			null,
-			rej
+			(error) => { console.log(error) }
 		);
 	});
 	return prm;
@@ -49,13 +50,20 @@ const getCubeTexture = (source: any) => {
 export const getResources = () => {
 
 	const promiseArr: Promise<SourceObj>[] = [];
+	console.log(promiseArr.length)
 
 	for (let textureSource of textureSources) {
 		switch (textureSource.type) {
-			case 'cubeTexture': promiseArr.push(getCubeTexture(textureSource))
-			case 'texture': promiseArr.push(getTexture(textureSource))
+			case 'cubeTexture':
+				promiseArr.push(getCubeTexture(textureSource));
+				break;
+			case 'texture':
+				promiseArr.push(getTexture(textureSource));
+				break;
 		}
+		console.log(promiseArr.length)
 	}
+
 
 	return Promise.all(promiseArr).then((values) => {
 		const result: {

@@ -1,5 +1,5 @@
 import { Base } from './base';
-import { AmbientLight, Clock, DirectionalLight } from 'three';
+import { AmbientLight, Clock, CubeTextureLoader, DirectionalLight } from 'three';
 
 export class Env {
     ambientLight: AmbientLight;
@@ -11,6 +11,7 @@ export class Env {
     setLights() {
         this.setAmbientLight();
         this.setDirectionalLight();
+        this.setBackground();
     }
 
     setDirectionalLight() {
@@ -23,8 +24,13 @@ export class Env {
     }
 
     setAmbientLight() {
-        this.ambientLight = new AmbientLight(0xffffff, 0.3);
+        this.ambientLight = new AmbientLight(0xffffff, 1);
         this.base.scene.add(this.ambientLight)
+    }
+
+    setBackground() {
+        this.base.scene.background = this.base.resources.gradientCubeTexture
+
     }
 
 

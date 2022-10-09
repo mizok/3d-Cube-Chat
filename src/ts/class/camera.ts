@@ -18,14 +18,19 @@ export class Camera {
 
     setInstance() {
         const camera = new PerspectiveCamera(35, this.sizer.width / this.sizer.height, 0.1, 100);
-        camera.position.set(0, 0, 5);
+        camera.position.set(-7.942670134404548, 1.246140969776503, 10.624623934002567);
         this.instance = camera;
         this.scene.add(this.instance)
+        // //@ts-ignore
+        // window.cm = camera;
+
     }
 
     setControls() {
         this.controls = new OrbitControls(this.instance, this.canvas)
-        this.controls.enableDamping = true
+        this.controls.enableDamping = true;
+        this.controls.enableZoom = false;
+        this.controls.enablePan = false;
     }
 
     resize() {

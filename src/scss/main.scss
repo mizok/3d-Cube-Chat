@@ -3,8 +3,97 @@
 html,
 body {
   height: 100%;
-  >canvas{
-    width: 100% !important;
-    height: 100% !important;
+  .wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
+}
+
+$chatWidth:400px;
+
+.wrapper{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  &__inner{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transform:none;
+  }
+  &--active  &__chat-block{
+    width: $chatWidth;
+  }
+  &__canvas{
+    height: 100%;
+    width: 100%;
+    flex:none;
+    transition:width 500ms;
+  }
+  &--active  &__canvas{
+    width: calc(100% - #{$chatWidth}) !important;
+  }
+  &__chat-block{
+    width: 0;
+    flex:none;
+    height: 100%;
+    transition: width 500ms;
+  }
+}
+
+.chat-block{
+
+
+
+  &__toggler{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border:none;
+    cursor:pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    background-color: transparent;
+    background-color: rgb(34, 34, 34);
+    border-radius: 50%;
+    box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07);
+    &:before{
+      content: '';
+      display: block;
+      position: absolute;
+      background-image: url(~@img/chat.png);
+      background-size: cover;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 50%;
+      height: 50%;
+      transition:opacity 500ms 1s;
+      opacity: 0.5;
+      z-index: 2;
+    }
+    &:hover::before{
+      opacity: 0.75;
+    }
+  }
+
+  &__content{
+    
+  }
+
+  &--active &__content{
+    display: none;
+  }
+
 }

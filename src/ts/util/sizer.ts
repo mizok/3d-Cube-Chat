@@ -15,6 +15,9 @@ export class Sizer extends EventEmitter {
         window.addEventListener('resize', this.sizing.bind(this))
     }
     sizing() {
+        this.canvas.width = null;
+        this.canvas.height = null;
+        this.canvas.setAttribute('style', '')
         const rect = this.canvas.getBoundingClientRect();
         this.width = rect.width;
         this.height = rect.height

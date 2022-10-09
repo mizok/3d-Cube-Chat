@@ -4,9 +4,15 @@
 <%- include('../template/head.ejs',{title:'Index'})%>
 
 <body>
-  <%- include('../template/header.ejs') %>
-  <canvas></canvas>
-  <%- include('../template/footer.ejs') %>
+  <div class="wrapper" id="wrapper">
+    <div class="wrapper__inner">
+      <canvas class="wrapper__canvas"></canvas>
+      <div class="wrapper__chat-block chat-block " id="chat-block">
+        <button class="chat-block__toggler" id="chat-block-toggler"></button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
+
