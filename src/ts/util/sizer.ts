@@ -15,10 +15,7 @@ export class Sizer extends EventEmitter {
         window.addEventListener('resize', this.sizing.bind(this))
     }
     sizing() {
-        this.canvas.width = null;
-        this.canvas.height = null;
-        this.canvas.setAttribute('style', '')
-        const rect = this.canvas.getBoundingClientRect();
+        const rect = this.canvas.parentElement.getBoundingClientRect();
         this.width = rect.width;
         this.height = rect.height
         this.trigger('resize', [this.width, this.height])

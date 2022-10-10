@@ -4,8 +4,8 @@ class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
     private chatBlockActive = false;
-    constructor(canvas: HTMLCanvasElement) {
-        super(canvas);
+    constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement) {
+        super(canvas, domCanvas, domBundle);
         this.initChatUI();
     }
     initChatUI() {
@@ -24,6 +24,8 @@ class Main extends Base {
 
 
 (() => {
-    const cvs = document.querySelector('canvas');
-    const instance = new Main(cvs);
+    const cvs = document.querySelector('#canvas');
+    const dcvs = document.querySelector('#dom-canvas');
+    const domBundle = document.querySelector('#dom-bundle');
+    const instance = new Main(cvs as HTMLCanvasElement, dcvs as HTMLElement, domBundle as HTMLElement);
 })()

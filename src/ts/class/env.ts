@@ -34,7 +34,7 @@ export class Env {
     }
 
 
-    update(clock: Clock) {
+    update(delta: number) {
 
     }
 

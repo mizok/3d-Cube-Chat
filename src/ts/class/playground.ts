@@ -2,10 +2,12 @@ import { Env } from "./env";
 import { Base } from "./base";
 import { Clock } from "three";
 import { Cube } from "../mesh";
+import { DomCube } from "./dom-cube";
 
 export class Playground {
     env: Env;
     cube: Cube;
+    domCube: DomCube;
     ready = false;
     constructor(private base: Base) {
         this.init();
@@ -14,14 +16,17 @@ export class Playground {
         this.base.getResources().then(() => {
             this.env = new Env(this.base);
             this.cube = new Cube(this.base);
+            this.domCube = new DomCube(this.base);
             this.ready = true;
         })
     }
 
-    update(clock: Clock) {
+    update(delta: number) {
+
         if (this.ready) {
-            this.env.update(clock);
-            this.cube.update(clock);
+            this.env.update(delta);
+            this.cube.update(delta);
+            this.domCube.update(delta);
         }
 
     }

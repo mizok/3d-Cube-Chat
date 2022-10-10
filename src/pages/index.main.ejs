@@ -6,10 +6,66 @@
 <body>
   <div class="wrapper" id="wrapper">
     <div class="wrapper__inner">
-      <canvas class="wrapper__canvas"></canvas>
+      <div class="wrapper__canvas-block" id="canvas-block">
+        <div class="wrapper__dom-canvas" id="dom-canvas"></div>
+        <canvas class="wrapper__canvas" id="canvas"></canvas>
+      </div>
       <div class="wrapper__chat-block chat-block " id="chat-block">
         <button class="chat-block__toggler" id="chat-block-toggler"></button>
+        <div class="chat-block__header user">
+          <div class="user__avatar">
+            <img src="~@img/avatar.png" alt="">
+          </div>
+          <div class="user__name">
+            Mizok
+          </div>
+        </div>
+        <div class="chat-block__body">
+          <div class="chat-block__body-inner chat-main">
+            <div class="chat-main__chat ">
+              <div class="chat-main__bubble">Hello There!</div>
+            </div>
+            <div class="chat-main__chat chat-main__chat--other">
+              <div class="chat-main__bubble">Hello There!</div>
+            </div>
+            
+          </div>
+        </div>
+        <div class="chat-block__footer">
+          <div class="chat-block__input input-block">
+            <input type="text" id="txtInput" class="input-block__input"  placeholder="Type something...">
+            <button  class="input-block__button"  id="sendTxt">
+            </button>
+          </div>
+          <div class="chat-block__author author">
+            <div class="author__former">
+              &copy Mizok.H
+            </div>
+            <div class="author__latter">
+              <a href="#" class="author__link">
+                <img src="~@img/github.svg" alt="">
+              </a>
+              <a href="#" class="author__link">
+                <img src="~@img/twitter.svg" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="dom-bundle" id="dom-bundle">
+    <div class="chat-main" id="chat-main">
+      <div class="chat-main__chat ">
+        <div class="chat-main__bubble">Hello There!</div>
+      </div>
+      <div class="chat-main__chat chat-main__chat--other">
+        <div class="chat-main__bubble">Hello There!</div>
+      </div>
+    </div>
+    <div class="clock" id="clock">
+      <div class="clock__date">2012.10.10</div>
+      <div class="clock__time">19:02</div>
     </div>
   </div>
 </body>

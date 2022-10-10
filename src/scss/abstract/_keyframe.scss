@@ -1,0 +1,17 @@
+// gradient animation
+@keyframes gradient { 
+    0%{background-position:0 0}
+    100%{background-position:100% 0}
+  }
+
+  
+  // bubble animation
+@keyframes bubble{ 
+    0%{
+        transform:scale(0);
+    }
+    100%{
+        transform:scale(1);
+    }
+  }
+  

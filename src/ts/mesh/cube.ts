@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { Clock, ExtrudeGeometry, Group, Mesh, MeshMatcapMaterial, Shape } from "three";
+import { ExtrudeGeometry, Group, Mesh, MeshMatcapMaterial, Shape } from "three";
 import { Base } from "../class/base";
 import { MeshType } from "../interface";
 
@@ -56,7 +56,7 @@ export class Cube implements MeshType {
     doAnimation() {
         gsap.to(this.mesh.rotation, {
             x: 0,
-            y: 0,
+            y: -Math.PI / 2,
             z: 0,
             duration: 1, // 用Tween的方式刻意的讓傳遞數值的動作產生delay
             paused: true
@@ -66,11 +66,16 @@ export class Cube implements MeshType {
             y: 1,
             z: 1,
             duration: 2, // 用Tween的方式刻意的讓傳遞數值的動作產生delay
-            paused: true
+            paused: true,
+            onComplete: () => {
+                this.ready = true;
+            }
         }).play()
     }
 
-    update(clock: Clock) {
-        this.group.rotation.y = clock.getElapsedTime() / 3;
+    update(delta: number) {
+        if (!this.base.touched) {
+            this.group.rotation.y += delta / 5;
+        }
     }
 }
