@@ -1,25 +1,21 @@
 @mixin gradient-border( //
     $padding: 10px,
     // padding-box 留白量
-    $border-width: 1px,
+    $border-width: 3px,
     //邊框寬度
-    $border-radius: 5px,
+    $border-radius: 10px,
     //圓角
-    $backdrop-filter: blur(5px),
+    $backdrop-filter: none,
     //padding-box 的backdrop-filter屬性
-    $outer-shadow: 0 0 30px #fff,
+    $outer-shadow: none,
     // 外光暈
-    $inner-shadow: inset 0 0 30px #fff,
+    $inner-shadow: none,
     //內光暈 inner shadow 要記得補 inset
     $border-image: // border的漸層或是顏色
-    linear-gradient(-135deg,
-        rgba(255, 0, 255, 1) 0%,
-        rgba(255, 255, 255, 0.2) 100%),
+    radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%),
     $inner-image: // 內部 padding-box的漸層或是顏色
 
-    linear-gradient(180deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.2) 100%)) {
+    rgb(28, 28, 31)) {
     position: relative;
     padding: $padding;
     background: $inner-image;

@@ -46,6 +46,8 @@ $chatWidth: 400px;
     transition: transform 500ms;
     position: relative;
     z-index: 2;
+
+
   }
 
   &__chat-block {
@@ -58,15 +60,4 @@ $chatWidth: 400px;
 
 .dom-bundle {
   display: none;
-}
-
-
-.chat-main {
-  width: 400px;
-  height: 400px;
-  overflow: auto;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  padding: 10px;
-
 }

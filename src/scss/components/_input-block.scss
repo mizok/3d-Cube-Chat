@@ -1,7 +1,5 @@
-
-
 // colors
-$input-background: rgba(38, 38, 40,0);
+$input-background: rgba(38, 38, 40, 0);
 $input-text-inactive: #7881A1;
 $input-text-active: #BFD2FF;
 
@@ -15,6 +13,7 @@ $input-text-active: #BFD2FF;
   border-radius: 2px;
   padding: 0.7rem 1.5rem 0.8rem 1rem;
   background: $input-background;
+
   &:after {
     content: "";
     position: absolute;
@@ -29,6 +28,7 @@ $input-text-active: #BFD2FF;
     background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
     background-size: 500% auto;
     animation: gradient 3s linear infinite;
+    z-index: 1;
   }
 
   &__input {
@@ -37,26 +37,30 @@ $input-text-active: #BFD2FF;
     font-size: 1rem;
     line-height: 2.4rem;
     vertical-align: middle;
-    border-style: none; 
+    border-style: none;
     background: transparent;
     outline: none;
+
     &::-webkit-input-placeholder {
       color: $input-text-inactive;
     }
   }
 
   &__button {
-    color:  $input-text-inactive;
     font-size: 2.4rem;
     line-height: 2.4rem;
     vertical-align: middle;
     transition: color .25s;
-    padding: 0; 
-    background: none; 
-    border: none; 
+    padding: 0;
+    background: none;
+    border: none;
     outline: none;
+    opacity: 0.5;
+    transition: opacity 500ms;
+    cursor: pointer;
+
     &:hover {
-      color: $input-text-active;
+      opacity: 0.75;
     }
   }
 }

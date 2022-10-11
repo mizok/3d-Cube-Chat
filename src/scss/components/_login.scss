@@ -1,0 +1,63 @@
+.login {
+    padding: 40px;
+    background: linear-gradient(180deg, rgba(38, 38, 40, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    transition: opacity 500ms;
+
+    &--logined {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &__title {
+        margin: 0 0 30px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+        font-family: 'Silkscreen';
+    }
+
+    &__user-box {
+        position: relative;
+
+        .input-block {
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 0.5rem;
+            padding-top: 1.5rem;
+        }
+
+        label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 0;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+            top: -10px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+            font-family: 'Silkscreen';
+        }
+
+    }
+
+
+    &__button {
+
+        @include gradient-border();
+        width: 100%;
+        color: $white;
+        margin-top: 30px;
+        transition: box-shadow 500ms;
+        cursor: pointer;
+        font-family: 'Silkscreen';
+
+        &:hover {
+            box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.75);
+
+        }
+
+    }
+}

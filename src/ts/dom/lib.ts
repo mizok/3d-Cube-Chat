@@ -6,7 +6,6 @@ export function updateOcclude(offset: number, element: HTMLElement, object: Obje
     const bias = - offset / 10;
     const objectToward = object.getWorldDirection(new Vector3(0, 0, 0));
     const cameraToward = base.camera.instance.getWorldDirection(new Vector3(0, 0, 0));
-    console.log(objectToward)
     const dp = objectToward.dot(cameraToward);
     if (dp > bias) {
         element.style.opacity = '0';
