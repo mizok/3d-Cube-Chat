@@ -61,3 +61,24 @@
         box-shadow: $inner-shadow;
     }
 }
+
+
+@mixin custom-scroll {
+    scrollbar-width: auto;
+    scrollbar-color: #7e7a7f #ffffff;
+
+    /* Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+        width: 16px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #7e7a7f;
+        border-radius: 10px;
+        border: none;
+    }
+}

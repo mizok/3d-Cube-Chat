@@ -154,7 +154,7 @@ class Main extends Base {
         }
         const ele = this.createElementFromHTML(html)
         this.chatBlock.querySelector('#chat-main').appendChild(ele);
-        this.wrapper.querySelector('#chat-main-cube').appendChild(ele.cloneNode(true));
+        this.wrapper.querySelector('#chat-main-cube .chat-main__inner').appendChild(ele.cloneNode(true));
     }
 
     private createElementFromHTML(htmlString: string) {

@@ -38,6 +38,7 @@ export class Clock implements FaceType {
     }
 
     initClock() {
+        this.updateClock();//先執行一次避免開場有破綻
         this.timer = setInterval(this.updateClock.bind(this), 1000);
     }
 

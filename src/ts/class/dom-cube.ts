@@ -34,7 +34,7 @@ export class DomCube {
     doAnimation() {
         gsap.to(this.groupInner.rotation, {
             x: 0,
-            y: -Math.PI / 2,
+            y: Math.PI / 4,
             z: 0,
             duration: 1, // 用Tween的方式刻意的讓傳遞數值的動作產生delay
             paused: true
