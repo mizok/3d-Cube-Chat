@@ -74,7 +74,7 @@ export class Cube implements MeshType {
     }
 
     update(delta: number) {
-        if (!this.base.touched) {
+        if (!this.base.touched && !this.base.getRotationLockStatus()) {
             this.group.rotation.y += delta / 5;
         }
     }

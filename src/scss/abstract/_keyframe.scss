@@ -1,17 +1,35 @@
 // gradient animation
-@keyframes gradient { 
-    0%{background-position:0 0}
-    100%{background-position:100% 0}
+@keyframes gradient {
+  0% {
+    background-position: 0 0
   }
 
-  
-  // bubble animation
-@keyframes bubble{ 
-    0%{
-        transform:scale(0);
-    }
-    100%{
-        transform:scale(1);
-    }
+  100% {
+    background-position: 100% 0
   }
-  
+}
+
+
+// bubble animation
+@keyframes bubble {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+@keyframes unlock {
+  0% {
+    opacity: 0;
+    transform: rotation(-90deg);
+  }
+
+  100% {
+    opacity: 0.5;
+    transform: rotation(0deg);
+  }
+}

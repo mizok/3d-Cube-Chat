@@ -19,6 +19,7 @@ export class Camera {
     setInstance() {
         const camera = new PerspectiveCamera(35, this.sizer.width / this.sizer.height, 0.1, 100);
         camera.position.set(-7.942670134404548, 1.246140969776503, 5.624623934002567);
+        // camera.position.set(0, 0, 10);
         this.instance = camera;
         this.scene.add(this.instance)
         // //@ts-ignore

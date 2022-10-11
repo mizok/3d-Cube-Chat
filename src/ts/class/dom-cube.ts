@@ -1,12 +1,14 @@
 import { Group } from "three";
 import { Base } from "./base";
 import { Chat } from '../dom';
+import { SpaceInvader } from '../dom/space-inavader';
 import gsap from "gsap";
 import { Clock } from "../dom/clock";
 
 export class DomCube {
     chat: Chat;
     clock: Clock;
+    spaceInvader: SpaceInvader;
     groupOuter = new Group();
     groupInner = new Group();
     ready = false;
@@ -18,10 +20,12 @@ export class DomCube {
     init() {
         this.chat = new Chat(this.base);
         this.clock = new Clock(this.base);
+        this.spaceInvader = new SpaceInvader(this.base);
         this.groupInner.scale.set(0, 0, 0);
         this.groupInner.rotation.set(Math.PI / 3, Math.PI / 3, Math.PI / 3);
         this.groupInner.add(this.chat.object);
         this.groupInner.add(this.clock.object);
+        this.groupInner.add(this.spaceInvader.object);
         this.groupOuter.add(this.groupInner);
         this.base.scene2.add(this.groupOuter);
         this.doAnimation();
@@ -48,10 +52,11 @@ export class DomCube {
     }
 
     update(delta: number) {
-        if (!this.base.touched) {
+        if (!this.base.touched && !this.base.getRotationLockStatus()) {
             this.groupOuter.rotation.y += delta / 5;
         }
         this.chat.update();
         this.clock.update();
+        this.spaceInvader.update();
     }
 }

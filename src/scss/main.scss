@@ -3,7 +3,8 @@
 html,
 body {
   height: 100%;
-  .wrapper{
+
+  .wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -15,4 +16,5 @@ body {
 @import './components/chat-block';
 @import './components/input-block';
 @import './components/author';
-
+@import './components/space-invader';
+@import './components/clock';

@@ -1,0 +1,20 @@
+.clock {
+    &:hover {
+        opacity: 0.75;
+    }
+
+    * {
+        font-family: 'Silkscreen';
+        color: $white;
+    }
+
+    &__date {
+        font-size: 2rem;
+        display: flex;
+    }
+
+    &__time {
+        font-size: 4.5rem;
+        display: flex;
+    }
+}

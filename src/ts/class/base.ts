@@ -1,10 +1,11 @@
-import { Env } from './env';
 import { Renderer } from './renderer';
 import { Camera } from './camera';
 import { Ticker, Sizer } from '../util';
-import { Scene, Clock, Vector2, Vector } from 'three';
+import { Scene, Clock, Vector2 } from 'three';
 import { getResources } from '../resource';
 import { Playground } from './playground';
+
+let rotationLocked: boolean = false;
 
 export class Base {
     sizer = new Sizer(this.canvas)
@@ -13,10 +14,9 @@ export class Base {
     ticker = new Ticker();
     camera = new Camera(this);
     renderer = new Renderer(this);
-    cursor = new Vector2();
     playground = new Playground(this);
     touched = false;
-    touchedReactDelay = 1000;
+    touchedReactDelay = 2000;
     resources: {
         [key: string]: any
     }
@@ -43,6 +43,7 @@ export class Base {
         })
     }
 
+
     initTouchMechanic() {
         let startLocation = new Vector2();
         let endLocation = new Vector2();
@@ -55,7 +56,7 @@ export class Base {
         const cbEnd = (e: MouseEvent) => {
             endLocation.x = e.clientX;
             endLocation.y = e.clientY;
-            const delay = startLocation.distanceTo(endLocation) > 10 ? this.touchedReactDelay : 0;
+            const delay = startLocation.distanceTo(endLocation) > 5 ? this.touchedReactDelay : 0;
             clearTimeout(timeout)
             timeout = setTimeout(() => {
                 this.touched = false;
@@ -66,6 +67,14 @@ export class Base {
         this.domCanvas.addEventListener('mouseup', cbEnd)
         this.domCanvas.addEventListener('touchend', cbEnd)
         this.domCanvas.addEventListener('mouseleave', cbEnd)
+    }
+
+    toggleRotationLock(status: boolean) {
+        rotationLocked = status;
+    }
+
+    getRotationLockStatus() {
+        return rotationLocked;
     }
 
     async getResources() {

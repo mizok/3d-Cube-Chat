@@ -10,6 +10,7 @@ class Main extends Base {
     }
     initChatUI() {
         const toggler = this.chatBlock.querySelector('#chat-block-toggler');
+        const rotationLock = this.chatBlock.querySelector('#rotation-lock');
         toggler.addEventListener('click', () => {
             if (this.chatBlockActive) {
                 this.wrapper.classList.remove('wrapper--active');
@@ -19,6 +20,20 @@ class Main extends Base {
             }
             this.chatBlockActive = !this.chatBlockActive;
         })
+
+        rotationLock.addEventListener('click', () => {
+            const status = this.getRotationLockStatus();
+            if (status) {
+                rotationLock.classList.remove('chat-block__rotation-lock--active');
+            }
+            else {
+                rotationLock.classList.add('chat-block__rotation-lock--active');
+            }
+
+            this.toggleRotationLock(!status)
+
+        })
+
     }
 }
 

@@ -1,0 +1,17 @@
+.space-invader {
+    width: 391px;
+    height: 294px;
+    background-image: url(~@img/space-invader.png);
+    -webkit-animation: play 1s steps(6) infinite alternate;
+    animation: play 3s steps(6) infinite alternate;
+}
+
+@keyframes play {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: -2346px;
+    }
+}

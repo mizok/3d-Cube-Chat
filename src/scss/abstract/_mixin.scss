@@ -1,0 +1,67 @@
+@mixin gradient-border( //
+    $padding: 10px,
+    // padding-box 留白量
+    $border-width: 1px,
+    //邊框寬度
+    $border-radius: 5px,
+    //圓角
+    $backdrop-filter: blur(5px),
+    //padding-box 的backdrop-filter屬性
+    $outer-shadow: 0 0 30px #fff,
+    // 外光暈
+    $inner-shadow: inset 0 0 30px #fff,
+    //內光暈 inner shadow 要記得補 inset
+    $border-image: // border的漸層或是顏色
+    linear-gradient(-135deg,
+        rgba(255, 0, 255, 1) 0%,
+        rgba(255, 255, 255, 0.2) 100%),
+    $inner-image: // 內部 padding-box的漸層或是顏色
+
+    linear-gradient(180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.2) 100%)) {
+    position: relative;
+    padding: $padding;
+    background: $inner-image;
+    border-radius: $border-radius;
+    box-shadow: $outer-shadow;
+
+    @if ($backdrop-filter) {
+        backdrop-filter: $backdrop-filter;
+        -webkit-backdrop-filter: $backdrop-filter;
+    }
+
+    &:before {
+        pointer-events: none;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        inset: 0;
+        display: block;
+        border-radius: $border-radius;
+        padding: $border-width;
+        background: $border-image border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    &:after {
+        pointer-events: none;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: $border-radius;
+        border: $border-width solid transparent;
+        box-shadow: $inner-shadow;
+    }
+}
