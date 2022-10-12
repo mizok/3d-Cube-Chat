@@ -11,7 +11,7 @@ class Main extends Base {
     private socket: Socket;
     private myName: string;
     // private path = 'https://3d-cube-chat.fly.dev';
-    private path = 'http://localhost:5500';
+    private path = 'http://192.168.1.101:5500';
     constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement) {
         super(canvas, domCanvas, domBundle);
         this.initChatUI();
@@ -50,6 +50,7 @@ class Main extends Base {
                 //準備關閉側選單
                 this.wrapper.classList.remove('wrapper--active');
                 showTarget = this.getLoginStatus() ? 'chatMainInner' : 'loginGuide';
+                this.setRotationLockFromUI(false);
             }
             else {
                 //準備開啟側選單
@@ -70,6 +71,7 @@ class Main extends Base {
                 //準備關閉側選單
                 this.wrapper.classList.remove('wrapper--active');
                 showTarget = this.getLoginStatus() ? 'chatMainInner' : 'loginGuide';
+                this.setRotationLockFromUI(false);
             }
             this.playground.domCube.chat.showScreen(showTarget)
             this.chatBlockActive = status;
@@ -139,7 +141,8 @@ class Main extends Base {
         this.socket.on('add', (data) => {
             var html = `<p>${data.username} 加入聊天室</p>`
             // $('.chat-con').append(html);
-            this.playground.domCube.chat.setGuestNumber(data.userCount)
+            this.playground.domCube.chat.setGuestNumber(data.userCount);
+            this.playground.domCube.chat.refreshGuestList(data?.users);
         })
 
         //離開成功
@@ -172,7 +175,6 @@ class Main extends Base {
         this.playground.cube.showChat()
         this.playground.domCube.showChat()
         this.playground.domCube.chat.showScreen('guestList');
-        this.playground.domCube.chat.refreshGuestList(data?.users);
         this.setLoginStatus(true);
     }
 
@@ -210,8 +212,12 @@ class Main extends Base {
                     `;
         }
         const ele = createElementFromHTML(html)
-        this.chatBlock.querySelector('#chat-main').appendChild(ele);
-        this.wrapper.querySelector('#chat-main-cube .chat-main__inner#chat-main-inner').appendChild(ele.cloneNode(true));
+        const containerMain = this.chatBlock.querySelector('#chat-main');
+        const containerCube = this.wrapper.querySelector('#chat-main-cube .chat-main__inner#chat-main-inner');
+        containerMain.appendChild(ele);
+        containerCube.appendChild(ele.cloneNode(true));
+        containerMain.parentElement.scrollTop = containerMain.scrollHeight;
+        containerCube.scrollTop = containerCube.scrollHeight;
     }
 
 

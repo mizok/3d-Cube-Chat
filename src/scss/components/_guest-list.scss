@@ -1,11 +1,58 @@
 .guest-list {
-    &__inner {}
+    * {
+        color: $white;
+        font-family: 'Silkscreen';
+    }
 
-    &__header {}
+    &__inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
 
-    &__number {}
+    &__title {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
 
-    &__ul {}
+    &__header {
+        padding: 10px;
+        border-bottom: 3px solid $white;
+        flex: none;
+    }
 
-    &__li {}
+    &__number {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    &__ul {
+        flex: 1;
+        padding: 0 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        overflow: auto;
+        @include custom-scroll();
+    }
+
+    &__li+&__li {
+        border-top: 3px dotted $white;
+    }
+
+
+    &__li {
+        opacity: 0;
+        animation: fadeIndownSmall 500ms forwards;
+
+    }
+}
+
+.guest {
+    padding: 20px;
+
+    &__name {
+        font-size: 1rem;
+    }
 }

@@ -53,7 +53,7 @@ export class Chat extends EventEmitter implements FaceType {
         list.forEach((guest, index) => {
             const item =
                 `
-           <li class="guest-list__li guest" style="transition:opacity ${transitionGap * index},transform ${transitionGap * index}">
+           <li class="guest-list__li guest" style="animation-delay:${transitionGap * index}ms">
                 <div class="guest__name">${guest.username}</div>
             </li>
             `

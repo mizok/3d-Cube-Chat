@@ -98,7 +98,7 @@ const config = (env: any, argv: any): webpack.Configuration => {
     target: ['web', 'es6'],
     devtool: 'source-map',
     devServer: {
-
+      host: '192.168.1.101',
       historyApiFallback: true,
       open: true,
       compress: true,

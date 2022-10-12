@@ -53,3 +53,11 @@ export function createElementFromHTML(htmlString: string) {
   // Change this to div.childNodes to support multiple top-level nodes.
   return div.firstChild;
 }
+
+export function getTargetAngle(angle: number) {
+  const remain = angle % (2 * Math.PI);
+  const minor = angle - remain - 0.25 * Math.PI;
+  const major = angle + ((3 * Math.PI / 4) - remain)
+  const newAngle = remain < Math.PI ? minor : major;
+  return newAngle;
+}

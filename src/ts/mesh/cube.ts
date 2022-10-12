@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { ExtrudeGeometry, Group, Mesh, MeshMatcapMaterial, Shape } from "three";
 import { Base } from "../class/base";
-import { cubeLikeConfig } from "../dom/lib/function";
+import { cubeLikeConfig, getTargetAngle } from "../dom/lib/function";
 import { MeshType } from "../interface";
 
 export class Cube implements MeshType {
@@ -59,8 +59,15 @@ export class Cube implements MeshType {
     }
 
     showChat() {
+
         gsap.to(this.mesh.rotation, cubeLikeConfig.showChatAnimationInnerRotationConfig)
-        gsap.to(this.group.rotation, cubeLikeConfig.showChatAnimationOuterRotationConfig)
+        const angle = getTargetAngle(this.group.rotation.y)
+        gsap.to(this.group.rotation, {
+            x: 0,
+            y: angle,
+            z: 0,
+            duration: 2
+        })
 
         gsap.to(this.base.camera.instance.position, {
             x: this.base.camera.bestPoint.x,

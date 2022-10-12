@@ -1,0 +1,13 @@
+.music-iframe {
+    width: 350px;
+
+    iframe {
+        border-radius: 8px;
+        opacity: 0.45;
+        transition: opacity 500ms;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+}
