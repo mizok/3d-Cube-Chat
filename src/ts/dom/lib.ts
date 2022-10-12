@@ -1,18 +1,13 @@
-import { Object3D, Vector3 } from "three";
-import { Base } from "../class/base";
+export function updateOcclude(faceType:any) {
+  const box = faceType.base.playground.cube.mesh;
 
+  faceType.cNormal.copy(faceType.normal).applyMatrix3(box.normalMatrix);
 
-export function updateOcclude(offset: number, element: HTMLElement, object: Object3D, base: Base) {
-    const bias = - offset / 10;
-    const objectToward = object.getWorldDirection(new Vector3(0, 0, 0));
-    const cameraToward = base.camera.instance.getWorldDirection(new Vector3(0, 0, 0));
-    const dp = objectToward.dot(cameraToward);
-    if (dp > bias) {
-        element.style.opacity = '0';
-    }
-    else {
-        element.style.opacity = '1';
-    }
+  faceType.cPos.copy(faceType.pos).applyMatrix4(faceType.m4.multiplyMatrices(faceType.base.camera.instance.matrixWorldInverse, box.matrixWorld));
+
+  let d = faceType.cPos.negate().dot(faceType.cNormal);
+  
+  faceType.element.style.visibility = d < 0 ? "hidden" : "visible";
 }
 
 export function pad(n: number, l: number) {

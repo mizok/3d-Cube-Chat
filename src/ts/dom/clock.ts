@@ -1,4 +1,4 @@
-import { Object3D } from "three";
+import { Matrix4, Object3D, Vector3 } from "three";
 import { CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
 import { Base } from "../class/base";
 import { FaceType } from "../interface";
@@ -8,6 +8,11 @@ export class Clock implements FaceType {
     object: Object3D
     element: HTMLElement
     private offset = 1.7;
+    private pos = new Vector3(-this.offset, 0, 0);
+    private normal = new Vector3(-1, 0, 0);
+    private cNormal = new Vector3();
+    private cPos = new Vector3();
+    private m4 = new Matrix4();
     private timer: any;
     constructor(private base: Base) {
         this.setElement();
@@ -43,6 +48,6 @@ export class Clock implements FaceType {
     }
 
     update() {
-        updateOcclude(this.offset, this.element, this.object, this.base);
+        updateOcclude(this);
     }
 }
