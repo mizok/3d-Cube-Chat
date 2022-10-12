@@ -5,10 +5,10 @@ export declare class Cube implements MeshType {
     private base;
     mesh: Mesh;
     group: Group;
-    ready: boolean;
     constructor(base: Base);
     createRoundedBoxGeo(width: number, height: number, depth: number, radius0: number, smoothness: number): ExtrudeGeometry;
     setModel(): void;
     doAnimation(): void;
+    showChat(): void;
     update(delta: number): void;
 }

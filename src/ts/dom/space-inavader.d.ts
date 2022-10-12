@@ -6,6 +6,11 @@ export declare class SpaceInvader implements FaceType {
     object: Object3D;
     element: HTMLElement;
     private offset;
+    private pos;
+    private normal;
+    private cNormal;
+    private cPos;
+    private m4;
     constructor(base: Base);
     setElement(): void;
     update(): void;

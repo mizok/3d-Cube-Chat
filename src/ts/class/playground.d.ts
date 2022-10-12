@@ -2,7 +2,8 @@ import { Env } from "./env";
 import { Base } from "./base";
 import { Cube } from "../mesh";
 import { DomCube } from "./dom-cube";
-export declare class Playground {
+import { EventEmitter } from "../util";
+export declare class Playground extends EventEmitter {
     private base;
     env: Env;
     cube: Cube;

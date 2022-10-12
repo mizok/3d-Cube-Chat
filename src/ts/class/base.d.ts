@@ -23,7 +23,9 @@ export declare class Base {
     initResizeMechanic(): void;
     initTickMechanic(): void;
     initTouchMechanic(): void;
-    toggleRotationLock(status: boolean): void;
+    setRotationLock(status: boolean): void;
     getRotationLockStatus(): boolean;
+    setLoginStatus(status: boolean): void;
+    getLoginStatus(): boolean;
     getResources(): Promise<void>;
 }
