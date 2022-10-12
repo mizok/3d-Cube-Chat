@@ -207,6 +207,7 @@
 }
 
 .chat-main {
+  position: relative;
 
   &--cube {
     @include gradient-border($border-width: 5px, $outer-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5));
@@ -225,6 +226,24 @@
     padding: 10px;
     overflow: auto;
     @include custom-scroll();
+  }
+
+  &__inner--overlay {
+    position: absolute;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    top: 0;
+    left: 0;
+  }
+
+  &__inner--hide {
+    display: none;
+  }
+
+  &__inner &__login-guide,
+  &__inner &__guest-list {
+    height: 100%;
+    width: 100%;
   }
 
   &__chat+&__chat {

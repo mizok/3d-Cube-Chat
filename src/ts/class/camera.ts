@@ -1,10 +1,12 @@
-import { PerspectiveCamera } from 'three';
+import { PerspectiveCamera, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Base } from './base';
 
 export class Camera {
     instance: PerspectiveCamera;
     controls: OrbitControls;
+    bestPoint = new Vector3(-8, 1, 5.6);
+    minimunDrawbackAngle = Math.PI / 3;
     private sizer = this.base.sizer;
     private canvas = this.base.domCanvas;
     private scene = this.base.scene;
@@ -18,8 +20,7 @@ export class Camera {
 
     setInstance() {
         const camera = new PerspectiveCamera(35, this.sizer.width / this.sizer.height, 0.1, 100);
-        camera.position.set(-7.942670134404548, 1.246140969776503, 5.624623934002567);
-        // camera.position.set(0, 0, 10);
+        camera.position.set(this.bestPoint.x, this.bestPoint.y, this.bestPoint.z);
         this.instance = camera;
         this.scene.add(this.instance)
         // //@ts-ignore

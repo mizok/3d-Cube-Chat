@@ -6,6 +6,7 @@ import { getResources } from '../resource';
 import { Playground } from './playground';
 
 let rotationLocked: boolean = false;
+let loginStatus: boolean = false;
 
 export class Base {
     sizer = new Sizer(this.canvas)
@@ -69,12 +70,21 @@ export class Base {
         this.domCanvas.addEventListener('mouseleave', cbEnd)
     }
 
-    toggleRotationLock(status: boolean) {
+    setRotationLock(status: boolean) {
         rotationLocked = status;
     }
 
+
     getRotationLockStatus() {
         return rotationLocked;
+    }
+
+    setLoginStatus(status: boolean) {
+        loginStatus = status;
+    }
+
+    getLoginStatus() {
+        return loginStatus;
     }
 
     async getResources() {

@@ -1,0 +1,34 @@
+.login-guide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    * {
+        font-family: 'Silkscreen';
+        color: $white;
+    }
+
+
+    &__title {
+        font-size: 50px;
+        animation: flickr 1s steps(3) infinite forwards;
+    }
+
+    &__button {
+        font-size: 20px;
+        border-radius: 99px;
+        padding: 15px;
+        margin-top: 30px;
+        background-color: transparent;
+        border: 3px solid $white;
+        opacity: 0.5;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+}

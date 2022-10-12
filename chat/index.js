@@ -44,6 +44,7 @@ io.on('connection', (socket) => {
                 id: socket.id
             })
             data.userCount = users.length
+            data.users = users;
             /*發送 登入成功 事件*/
             socket.emit('loginSuccess', data)
             /*向所有連接的用戶廣播 add 事件*/
@@ -64,7 +65,7 @@ io.on('connection', (socket) => {
         users = users.filter((val) => {
             return (val.username !== data.username)
         })
-        io.sockets.emit('leave', { username: data.username, userCount: users.length });
+        io.sockets.emit('leave', { username: data.username, userCount: users.length,users:users });
         socket.disconnect();
     })
 
@@ -79,7 +80,7 @@ io.on('connection', (socket) => {
             return (val.id !== socket.id)
         })
 
-        io.sockets.emit('leave', { username: userLeft, userCount: users.length })
+        io.sockets.emit('leave', { username: userLeft, userCount: users.length,users:users })
     })
 
     socket.on('sendMessage', function (data) {

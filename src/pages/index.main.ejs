@@ -41,7 +41,6 @@
               <div class="chat-main__chat chat-main__chat--other">
                 <div class="chat-main__bubble">Hello There!</div>
               </div> -->
-
             </div>
           </div>
           <div class="chat-block__footer">
@@ -70,7 +69,28 @@
     </div>
     <div class="dom-bundle" id="dom-bundle">
       <div class="chat-main chat-main--cube" id="chat-main-cube">
-        <div class="chat-main__inner">
+        <div class="chat-main__inner chat-main__inner--overlay" id="guest-list">
+          <div class="chat-main__guest-list guest-list">
+            <div class="guest-list__inner">
+              <div class="guest-list__header">
+                <div class="guest-list__number" id="guest-number"></div>
+              </div>
+              <ul class="guest-list__ul" id="guest-list-container">
+                <!-- <li class="guest-list__li guest">
+                  <div class="guest__name"></div>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="chat-main__inner chat-main__inner--overlay" id="login-guide">
+          <div class="chat-main__login-guide login-guide">
+            <div class="login-guide__title">Login<br>First</div>
+            <button class="login-guide__button" id="login-guide-button">LOGIN</button>
+            <!-- <canvas class="login-guide__canvas" id="login-guide-canvas"></canvas> -->
+          </div>
+        </div>
+        <div class="chat-main__inner" id="chat-main-inner">
 
         </div>
       </div>

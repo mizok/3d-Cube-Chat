@@ -1,0 +1,53 @@
+import {
+    Scene,
+    WebGLRenderer,
+    PerspectiveCamera,
+    Color
+} from "three";
+
+import {
+    InfiniteGridHelper
+} from './grid'
+
+export function loginGuide(canvas: HTMLCanvasElement) {
+    const scene = new Scene();
+    const renderer = new WebGLRenderer({
+        antialias: true,
+        canvas: canvas
+    });
+
+    const rect = canvas.getBoundingClientRect();
+
+
+    renderer.setSize(rect.width, rect.height);
+    renderer.setViewport(0, 0, rect.width, rect.height);
+
+    renderer.setClearColor(new Color(0, 0, 0));
+
+    const camera = new PerspectiveCamera(
+        75,
+        rect.width / rect.height,
+        0.1,
+        1000
+    );
+    scene.add(camera);
+
+    const grid = new InfiniteGridHelper();
+
+    scene.add(grid);
+
+
+    camera.position.z = 5;
+
+    let time = 0;
+    const loop = (time: number) => {
+        renderer.render(scene, camera);
+        requestAnimationFrame((time) => {
+            loop(time);
+        });
+    };
+
+    loop(time);
+}
+
+

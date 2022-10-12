@@ -1,12 +1,12 @@
 import gsap from "gsap";
 import { ExtrudeGeometry, Group, Mesh, MeshMatcapMaterial, Shape } from "three";
 import { Base } from "../class/base";
+import { cubeLikeConfig } from "../dom/lib/function";
 import { MeshType } from "../interface";
 
 export class Cube implements MeshType {
     mesh: Mesh;
     group: Group;
-    ready = false;
     constructor(private base: Base) {
         this.setModel();
     }
@@ -43,8 +43,8 @@ export class Cube implements MeshType {
         this.group = new Group();
 
         this.mesh = new Mesh(geo, mat);
-        this.mesh.scale.set(0, 0, 0);
-        this.mesh.rotation.set(Math.PI / 3, Math.PI / 3, Math.PI / 3);
+        this.mesh.scale.set(...cubeLikeConfig.initialScale);
+        this.mesh.rotation.set(...cubeLikeConfig.initialRotation);
 
         this.group.add(this.mesh);
 
@@ -54,28 +54,26 @@ export class Cube implements MeshType {
     }
 
     doAnimation() {
-        gsap.to(this.mesh.rotation, {
-            x: 0,
-            y: Math.PI / 4,
-            z: 0,
-            duration: 1, // 用Tween的方式刻意的讓傳遞數值的動作產生delay
-            paused: true
-        }).play()
-        gsap.to(this.mesh.scale, {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 2, // 用Tween的方式刻意的讓傳遞數值的動作產生delay
-            paused: true,
-            onComplete: () => {
-                this.ready = true;
-            }
-        }).play()
+        gsap.to(this.mesh.rotation, cubeLikeConfig.startAnimationInnerRotationConfig)
+        gsap.to(this.mesh.scale, cubeLikeConfig.startAnimationInnerScalingConfig)
+    }
+
+    showChat() {
+        gsap.to(this.mesh.rotation, cubeLikeConfig.showChatAnimationInnerRotationConfig)
+        gsap.to(this.group.rotation, cubeLikeConfig.showChatAnimationOuterRotationConfig)
+
+        gsap.to(this.base.camera.instance.position, {
+            x: this.base.camera.bestPoint.x,
+            y: this.base.camera.bestPoint.y,
+            z: this.base.camera.bestPoint.z,
+            duration: 2,
+        })
+
     }
 
     update(delta: number) {
         if (!this.base.touched && !this.base.getRotationLockStatus()) {
-            this.group.rotation.y += delta / 5;
+            this.group.rotation.y += delta / cubeLikeConfig.updateParameter;
         }
     }
 }

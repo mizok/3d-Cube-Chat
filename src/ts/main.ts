@@ -1,45 +1,93 @@
 import { Base } from './class/base';
 import { io, Socket } from 'socket.io-client';
 import { trim } from 'lodash';
+import { ShowScreenTargets } from './interface';
+import { createElementFromHTML } from './dom/lib/function';
 class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
+    private rotationLock: Element = this.chatBlock.querySelector('#rotation-lock');
     private chatBlockActive = false;
     private socket: Socket;
     private myName: string;
-    private path = 'https://3d-cube-chat.fly.dev';
+    // private path = 'https://3d-cube-chat.fly.dev';
+    private path = 'http://localhost:5500';
     constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement) {
         super(canvas, domCanvas, domBundle);
         this.initChatUI();
     }
+
+    toggleRotationLockFromUI(): void {
+        const status = this.getRotationLockStatus();
+        if (status) {
+            this.rotationLock.classList.remove('chat-block__rotation-lock--active');
+        }
+        else {
+            this.rotationLock.classList.add('chat-block__rotation-lock--active');
+        }
+
+        this.setRotationLock(!status)
+    }
+    setRotationLockFromUI(status: boolean): void {
+        if (status) {
+            this.rotationLock.classList.add('chat-block__rotation-lock--active');
+        }
+        else {
+            this.rotationLock.classList.remove('chat-block__rotation-lock--active');
+        }
+
+        this.setRotationLock(status)
+    }
+
     private initChatUI() {
         const toggler = this.chatBlock.querySelector('#chat-block-toggler');
-        const rotationLock = this.chatBlock.querySelector('#rotation-lock');
         const loginBtn = this.chatBlock.querySelector('#login-button');
         const sendBtn = this.chatBlock.querySelector('#send-message-button');
         const logoutBtn = this.chatBlock.querySelector('#logout-button');
-        toggler.addEventListener('click', () => {
+        const panelToggle = () => {
+            let showTarget: ShowScreenTargets
             if (this.chatBlockActive) {
+                //準備關閉側選單
                 this.wrapper.classList.remove('wrapper--active');
+                showTarget = this.getLoginStatus() ? 'chatMainInner' : 'loginGuide';
             }
             else {
+                //準備開啟側選單
                 this.wrapper.classList.add('wrapper--active');
+                showTarget = this.getLoginStatus() ? 'guestList' : 'loginGuide';
             }
+            this.playground.domCube.chat.showScreen(showTarget)
             this.chatBlockActive = !this.chatBlockActive;
-        })
-
-        rotationLock.addEventListener('click', () => {
-            const status = this.getRotationLockStatus();
-            if (status) {
-                rotationLock.classList.remove('chat-block__rotation-lock--active');
+        }
+        const panelSet = (status: boolean) => {
+            let showTarget: ShowScreenTargets
+            if (status == true) {
+                //準備開啟側選單
+                this.wrapper.classList.add('wrapper--active');
+                showTarget = this.getLoginStatus() ? 'guestList' : 'loginGuide';
             }
             else {
-                rotationLock.classList.add('chat-block__rotation-lock--active');
+                //準備關閉側選單
+                this.wrapper.classList.remove('wrapper--active');
+                showTarget = this.getLoginStatus() ? 'chatMainInner' : 'loginGuide';
             }
+            this.playground.domCube.chat.showScreen(showTarget)
+            this.chatBlockActive = status;
 
-            this.toggleRotationLock(!status)
+        }
 
+        toggler.addEventListener('click', panelToggle)
+
+        this.playground.on('ready', () => {
+            this.playground.domCube.chat.showScreen('loginGuide');
+            this.playground.domCube.chat.on('cube-login-button-click', () => {
+                this.setRotationLockFromUI(true);
+                panelSet(true);
+            })
         })
+
+
+        this.rotationLock.addEventListener('click', this.toggleRotationLockFromUI.bind(this))
 
         loginBtn.addEventListener('click', () => {
             this.myName = trim((this.chatBlock.querySelector('#login-name') as HTMLInputElement).value);
@@ -71,7 +119,6 @@ class Main extends Base {
             }
         })
 
-
     }
     private initChatSocket() {
         /*登入成功*/
@@ -92,7 +139,7 @@ class Main extends Base {
         this.socket.on('add', (data) => {
             var html = `<p>${data.username} 加入聊天室</p>`
             // $('.chat-con').append(html);
-            document.getElementById('chat-title').innerHTML = `在線人數: ${data.userCount}`
+            this.playground.domCube.chat.setGuestNumber(data.userCount)
         })
 
         //離開成功
@@ -103,32 +150,38 @@ class Main extends Base {
         //退出提示
         this.socket.on('leave', (data) => {
             if (data.username != null) {
+                this.playground.domCube.chat.refreshGuestList(data?.users)
                 let html = `<p>${data.username} 退出聊天室</p>`;
                 // $('.chat-con').append(html);
-                // document.getElementById('chat-title').innerHTML = `在線人數: ${data.userCount}`;
+                this.playground.domCube.chat.setGuestNumber(data.userCount)
             }
         })
-
-
 
         //收到訊息
         this.socket.on('receiveMessage', (data) => {
 
             this.showMessage(data)
         })
-
-
     }
     private checkIn(data: any) {
         const loginWrapper = this.chatBlock.querySelector('#login');
         const userNameEle = this.chatBlock.querySelector('#my-name');
         userNameEle.innerHTML = data.username;
         loginWrapper.classList.add('login--logined');
+        this.setRotationLockFromUI(true);
+        this.playground.cube.showChat()
+        this.playground.domCube.showChat()
+        this.playground.domCube.chat.showScreen('guestList');
+        this.playground.domCube.chat.refreshGuestList(data?.users);
+        this.setLoginStatus(true);
     }
 
     private checkOut() {
         const loginWrapper = this.chatBlock.querySelector('#login');
         loginWrapper.classList.remove('login--logined');
+        this.playground.domCube.chat.showScreen('loginGuide');
+        this.chatBlock.querySelector('#chat-main').innerHTML = '';
+        this.setLoginStatus(false);
     }
 
     private sendMessage() {
@@ -156,18 +209,11 @@ class Main extends Base {
                     </div>
                     `;
         }
-        const ele = this.createElementFromHTML(html)
+        const ele = createElementFromHTML(html)
         this.chatBlock.querySelector('#chat-main').appendChild(ele);
-        this.wrapper.querySelector('#chat-main-cube .chat-main__inner').appendChild(ele.cloneNode(true));
+        this.wrapper.querySelector('#chat-main-cube .chat-main__inner#chat-main-inner').appendChild(ele.cloneNode(true));
     }
 
-    private createElementFromHTML(htmlString: string) {
-        const div = document.createElement('div');
-        div.innerHTML = htmlString.trim();
-
-        // Change this to div.childNodes to support multiple top-level nodes.
-        return div.firstChild;
-    }
 
 }
 
