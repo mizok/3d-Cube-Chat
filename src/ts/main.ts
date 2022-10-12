@@ -5,12 +5,12 @@ class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
     private chatBlockActive = false;
-    private socket: Socket = io('ws://192.168.1.101:5500');
+    private socket: Socket;
     private myName: string;
+    private path = 'https://3d-cube-chat.fly.dev';
     constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement) {
         super(canvas, domCanvas, domBundle);
         this.initChatUI();
-        this.initChatSocket();
     }
     private initChatUI() {
         const toggler = this.chatBlock.querySelector('#chat-block-toggler');
@@ -45,6 +45,8 @@ class Main extends Base {
             this.myName = trim((this.chatBlock.querySelector('#login-name') as HTMLInputElement).value);
             if (this.myName) {
                 /*發送事件*/
+                this.socket = io(this.path);
+                this.initChatSocket();
                 this.socket.emit('login', { username: this.myName })
             } else {
                 alert('Please enter a name :)')
@@ -106,6 +108,8 @@ class Main extends Base {
                 // document.getElementById('chat-title').innerHTML = `在線人數: ${data.userCount}`;
             }
         })
+
+
 
         //收到訊息
         this.socket.on('receiveMessage', (data) => {
