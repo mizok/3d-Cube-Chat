@@ -3,7 +3,7 @@ import { CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
 import { Base } from "../class/base";
 import { FaceType, ShowScreenTargets } from "../interface";
 import { EventEmitter } from "../util";
-import { createElementFromHTML, updateOcclude } from "./lib/function";
+import { updateOcclude } from "../lib/function";
 
 
 export class Chat extends EventEmitter implements FaceType {

@@ -2,7 +2,8 @@ import { Base } from './class/base';
 import { io, Socket } from 'socket.io-client';
 import { trim } from 'lodash';
 import { ShowScreenTargets } from './interface';
-import { createElementFromHTML } from './dom/lib/function';
+import { createElementFromHTML } from './lib/function';
+import { doAlert, doConfirm } from './lib/service';
 class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
@@ -10,8 +11,8 @@ class Main extends Base {
     private chatBlockActive = false;
     private socket: Socket;
     private myName: string;
-    // private path = 'https://3d-cube-chat.fly.dev';
-    private path = 'http://192.168.1.101:5500';
+    private path = 'https://3d-cube-chat.fly.dev';
+    // private path = 'http://192.168.1.101:5500';
     constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement) {
         super(canvas, domCanvas, domBundle);
         this.initChatUI();
@@ -56,6 +57,8 @@ class Main extends Base {
                 //準備開啟側選單
                 this.wrapper.classList.add('wrapper--active');
                 showTarget = this.getLoginStatus() ? 'guestList' : 'loginGuide';
+                this.setRotationLockFromUI(true);
+                this.playground.showChat();
             }
             this.playground.domCube.chat.showScreen(showTarget)
             this.chatBlockActive = !this.chatBlockActive;
@@ -66,6 +69,10 @@ class Main extends Base {
                 //準備開啟側選單
                 this.wrapper.classList.add('wrapper--active');
                 showTarget = this.getLoginStatus() ? 'guestList' : 'loginGuide';
+                if (this.getLoginStatus()) {
+                    this.setRotationLockFromUI(true);
+                }
+                this.playground.showChat();
             }
             else {
                 //準備關閉側選單
@@ -99,7 +106,7 @@ class Main extends Base {
                 this.initChatSocket();
                 this.socket.emit('login', { username: this.myName })
             } else {
-                alert('Please enter a name :)')
+                doAlert('Please enter a name :)')
             }
         })
 
@@ -107,8 +114,8 @@ class Main extends Base {
             this.sendMessage();
         })
 
-        logoutBtn.addEventListener('click', () => {
-            let leave = confirm('Are you sure you want to leave?')
+        logoutBtn.addEventListener('click', async () => {
+            let leave = await doConfirm('Are you sure you want to leave the chat?')
             if (leave) {
                 /*觸發 logout 事件*/
                 this.socket.emit('logout', { username: this.myName });
@@ -128,13 +135,13 @@ class Main extends Base {
             if (data.username === this.myName) {
                 this.checkIn(data)
             } else {
-                alert('Wrong username:( Please try again!')
+                doAlert('Wrong username:( Please try again!')
             }
         })
 
         /*登入失敗*/
         this.socket.on('loginFail', () => {
-            alert('Duplicate name already exists:0')
+            doAlert('Duplicate name already exists :(')
         })
 
         /*加入聊天室提示*/
@@ -172,10 +179,8 @@ class Main extends Base {
         userNameEle.innerHTML = data.username;
         loginWrapper.classList.add('login--logined');
         this.setRotationLockFromUI(true);
-        this.playground.cube.showChat()
-        this.playground.domCube.showChat()
-        this.playground.domCube.chat.showScreen('guestList');
         this.setLoginStatus(true);
+        this.playground.showChat();
     }
 
     private checkOut() {

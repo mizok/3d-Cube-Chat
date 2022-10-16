@@ -14,6 +14,7 @@ body {
 @import './abstract/mixin';
 @import './abstract/keyframe';
 @import './layout/layout';
+@import './components/modal';
 @import './components/chat-block';
 @import './components/input-block';
 @import './components/author';
@@ -22,4 +23,4 @@ body {
 @import './components/login';
 @import './components/login-guide';
 @import './components/guest-list';
-@import './components/music'
+@import './components/music';

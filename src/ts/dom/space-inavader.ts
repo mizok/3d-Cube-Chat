@@ -2,7 +2,7 @@ import { Object3D, Vector3, Matrix4 } from "three";
 import { CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
 import { Base } from "../class/base";
 import { FaceType } from "../interface";
-import { updateOcclude } from "./lib/function";
+import { updateOcclude } from "../lib/function";
 
 export class SpaceInvader implements FaceType {
     object: Object3D

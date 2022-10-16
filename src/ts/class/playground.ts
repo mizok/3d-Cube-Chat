@@ -24,6 +24,17 @@ export class Playground extends EventEmitter {
         })
     }
 
+    showChat() {
+        this.cube.showChat()
+        this.domCube.showChat()
+        if (this.base.getLoginStatus()) {
+            this.domCube.chat.showScreen('guestList');
+        }
+        else {
+            this.domCube.chat.showScreen('loginGuide');
+        }
+    }
+
     update(delta: number) {
         if (this.ready) {
             this.env.update(delta);

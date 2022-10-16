@@ -1,0 +1,124 @@
+.img-replace {
+    /* replace text with an image */
+    display: inline-block;
+    overflow: hidden;
+    text-indent: 100%;
+    color: transparent;
+    white-space: nowrap;
+}
+
+
+/* -------------------------------- 
+
+xpopup 
+
+-------------------------------- */
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(100, 100, 100, 0.482);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    z-index: 99;
+
+    &--active {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s 0s, visibility 0s 0s;
+    }
+
+    &__inner {
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        margin: 4em auto;
+        background: #FFF;
+        border-radius: .25em .25em .4em .4em;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-40px);
+        backface-visibility: hidden;
+        transition: transform 0.3s;
+
+        p {
+            padding: 3em 1em;
+        }
+    }
+
+    &--active &__inner {
+        transform: translateY(0);
+    }
+
+    &__inner &__close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 30px;
+        height: 30px;
+    }
+
+    &__close::before,
+    &__close::after {
+        content: '';
+        position: absolute;
+        top: 12px;
+        width: 14px;
+        height: 3px;
+        background-color: #8f9cb5;
+    }
+
+    &__close::before {
+        transform: rotate(45deg);
+        left: 8px;
+    }
+
+    &__close::after {
+        transform: rotate(-45deg);
+        right: 8px;
+    }
+
+    &__buttons {
+        user-select: none;
+        display: flex;
+
+        li {
+            flex: 1;
+            width: 50%;
+            list-style: none;
+        }
+
+        a {
+            display: block;
+            height: 60px;
+            line-height: 60px;
+            text-transform: uppercase;
+            color: #FFF;
+            -webkit-transition: background-color 0.2s;
+            -moz-transition: background-color 0.2s;
+            transition: background-color 0.2s;
+            text-decoration: none;
+        }
+
+        li:first-child a {
+            background: #595959;
+            border-radius: 0 0 0 .25em;
+        }
+
+        li:first-child a:hover {
+            background-color: #656565;
+        }
+
+        li:last-child a {
+            background: #9b9b9b;
+            border-radius: 0 0 .25em 0;
+        }
+
+        li:last-child a:hover {
+            background-color: #8d8d8d;
+        }
+    }
+}

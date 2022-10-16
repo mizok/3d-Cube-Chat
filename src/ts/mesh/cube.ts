@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { ExtrudeGeometry, Group, Mesh, MeshMatcapMaterial, Shape } from "three";
 import { Base } from "../class/base";
-import { cubeLikeConfig, getTargetAngle } from "../dom/lib/function";
+import { cubeLikeConfig, getTargetAngle } from "../lib/function";
 import { MeshType } from "../interface";
 
 export class Cube implements MeshType {
@@ -73,7 +73,7 @@ export class Cube implements MeshType {
             x: this.base.camera.bestPoint.x,
             y: this.base.camera.bestPoint.y,
             z: this.base.camera.bestPoint.z,
-            duration: 2,
+            duration: 4,
         })
 
     }
