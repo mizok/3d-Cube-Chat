@@ -1,5 +1,5 @@
 $chatWidth: 400px;
-$chatWidthMobile: 400px;
+$chatWidthMobile: 300px;
 
 .wrapper {
   height: 100%;
@@ -16,6 +16,10 @@ $chatWidthMobile: 400px;
 
   &--active &__inner {
     transform: translateX(-#{$chatWidth});
+
+    @include rwd($screen-pad-portrait) {
+      transform: translateX(-#{$chatWidthMobile});
+    }
   }
 
   &__canvas-block {
@@ -29,10 +33,18 @@ $chatWidthMobile: 400px;
 
   &--active &__canvas {
     transform: translateX(#{$chatWidth/2});
+
+    @include rwd($screen-pad-portrait) {
+      transform: translateX(#{$chatWidthMobile/2});
+    }
   }
 
   &--active &__dom-canvas {
     transform: translateX(#{$chatWidth/2});
+
+    @include rwd($screen-pad-portrait) {
+      transform: translateX(#{$chatWidthMobile/2});
+    }
   }
 
   &__canvas {
@@ -56,9 +68,13 @@ $chatWidthMobile: 400px;
     width: $chatWidth;
     height: 100%;
     box-shadow: 19px -1px 30px -17px rgba(0, 0, 0, 0.5) inset;
+
+    @include rwd($screen-pad-portrait) {
+      width: $chatWidthMobile;
+    }
   }
 }
 
 .dom-bundle {
-  display: none;
+  display: none !important;
 }
