@@ -63,7 +63,7 @@
   $column-gutter: 30px,
   $vertical-gutter: $column-gutter,
   $grid-child-selector: "*",
-  $box-sizing-fix:0px,
+  $box-sizing-fix: 0px,
   $max-width: 100%,
   $min-screen-width: 0px,
   $max-screen-width: 999999px) {
@@ -121,7 +121,7 @@
   $vertical-gutter: 30px,
   $grid-child-selector: "*",
   $max-width: 100%,
-  $box-sizing-fix:0px,
+  $box-sizing-fix: 0px,
   $min-screen-width: 0px,
   $max-screen-width: 9999999px) {
   $gutter-num: ($column-number - 1);
@@ -304,7 +304,7 @@
 /// @param {Size} $line-length:80% 參數請填叉叉的線長
 /// @param {Color} $line-color 參數請填叉叉的線色
 
-@mixin genCross($block-width:50px, $block-height:50px, $line-width:2px, $line-length:80%, $line-color:green) {
+@mixin genCross($block-width: 50px, $block-height: 50px, $line-width: 2px, $line-length: 80%, $line-color: green) {
   position: relative;
   width: $block-width;
   height: $block-height;
@@ -335,7 +335,7 @@
 
 
 
-@mixin flex-width($width:0px, $box-sizing-fix:0px) {
+@mixin flex-width($width: 0px, $box-sizing-fix: 0px) {
   flex-basis: $width;
   width: $width;
   flex-grow: 0;
@@ -346,7 +346,7 @@
   }
 }
 
-@mixin flex-height($height:0px, $box-sizing-fix:0px) {
+@mixin flex-height($height: 0px, $box-sizing-fix: 0px) {
   flex-basis: $height;
   height: $height;
   flex-grow: 0;
@@ -377,5 +377,90 @@
 @mixin between-rwd($min-screen-width, $max-screen-width) {
   @media screen and (min-width:$min-screen-width) and (max-width: $max-screen-width) {
     @content;
+  }
+}
+
+@mixin gradient-border( //
+  $padding: 10px,
+  // padding-box 留白量
+  $border-width: 3px,
+  //邊框寬度
+  $border-radius: 10px,
+  //圓角
+  $backdrop-filter: none,
+  //padding-box 的backdrop-filter屬性
+  $outer-shadow: none,
+  // 外光暈
+  $inner-shadow: none,
+  //內光暈 inner shadow 要記得補 inset
+  $border-image: // border的漸層或是顏色
+  radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%),
+  $inner-image: // 內部 padding-box的漸層或是顏色
+
+  rgb(28, 28, 31)) {
+  position: relative;
+  padding: $padding;
+  background: $inner-image;
+  border-radius: $border-radius;
+  box-shadow: $outer-shadow;
+
+  @if ($backdrop-filter) {
+    backdrop-filter: $backdrop-filter;
+    -webkit-backdrop-filter: $backdrop-filter;
+  }
+
+  &:before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    inset: 0;
+    display: block;
+    border-radius: $border-radius;
+    padding: $border-width;
+    background: $border-image border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  &:after {
+    pointer-events: none;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $border-radius;
+    border: $border-width solid transparent;
+    box-shadow: $inner-shadow;
+  }
+}
+
+
+@mixin custom-scroll {
+  scrollbar-width: auto;
+  scrollbar-color: #7e7a7f #ffffff;
+
+  /* Chrome, Edge, and Safari */
+  &::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #7e7a7f;
+    border-radius: 10px;
+    border: none;
   }
 }

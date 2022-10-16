@@ -2,8 +2,8 @@ import { Base } from './class/base';
 import { io, Socket } from 'socket.io-client';
 import { trim } from 'lodash';
 import { ShowScreenTargets } from './interface';
-import { createElementFromHTML } from './lib/function';
-import { doAlert, doConfirm } from './lib/service';
+import { createElementFromHTML } from './dom/lib/function';
+import { doAlert, doConfirm } from './dom/lib/service';
 class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
