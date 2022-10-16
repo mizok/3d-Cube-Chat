@@ -11,5 +11,6 @@ export declare class Playground extends EventEmitter {
     ready: boolean;
     constructor(base: Base);
     init(): void;
+    showChat(): void;
     update(delta: number): void;
 }
