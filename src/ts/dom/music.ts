@@ -2,7 +2,7 @@ import { Matrix4, Object3D, Vector3 } from "three";
 import { CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
 import { Base } from "../class/base";
 import { FaceType } from "../interface";
-import { pad, updateOcclude } from "./lib/function";
+import { pad, updateOcclude } from "../lib/function";
 
 export class Music implements FaceType {
     object: Object3D

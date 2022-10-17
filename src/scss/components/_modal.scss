@@ -13,23 +13,8 @@
 xpopup 
 
 -------------------------------- */
-.modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(100, 100, 100, 0.482);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s 0s, visibility 0s 0.3s;
-    z-index: 99;
-
-    &--active {
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.3s 0s, visibility 0s 0s;
-    }
+.modal-prompt {
+    @include modalBase();
 
     &__inner {
         position: relative;
@@ -53,33 +38,7 @@ xpopup
         transform: translateY(0);
     }
 
-    &__inner &__close {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        width: 30px;
-        height: 30px;
-    }
 
-    &__close::before,
-    &__close::after {
-        content: '';
-        position: absolute;
-        top: 12px;
-        width: 14px;
-        height: 3px;
-        background-color: #8f9cb5;
-    }
-
-    &__close::before {
-        transform: rotate(45deg);
-        left: 8px;
-    }
-
-    &__close::after {
-        transform: rotate(-45deg);
-        right: 8px;
-    }
 
     &__buttons {
         user-select: none;
@@ -121,4 +80,65 @@ xpopup
             background-color: #8d8d8d;
         }
     }
+}
+
+.modal-music-search {
+    @include modalBase();
+
+    &__inner {
+        position: absolute;
+        width: calc(100% - 40px);
+        height: calc(100% - 100px);
+        max-width: 1024px;
+        max-height: 1024px;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(31, 31, 31, 0.8);
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-40px);
+        backface-visibility: hidden;
+        transition: transform 0.3s;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    &--active &__inner {
+        transform: translateY(0);
+    }
+
+    &__inner &__close {
+        background-color: rgb(42, 42, 42);
+        height: 40px;
+        width: 40px;
+        right: 0;
+        top: 0;
+        transform: translate(30%, -30%);
+        border-radius: 50%;
+
+        &:before,
+        &:after {
+            background-color: #fff;
+            height: 50%;
+        }
+    }
+
+    &__header {}
+
+    &__body {}
+
+
+    &__inner &__header {
+        flex: none;
+    }
+
+    &__inner &__body {
+        flex: 1;
+    }
+
 }

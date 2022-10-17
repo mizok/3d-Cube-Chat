@@ -26,8 +26,17 @@
             </div>
           </div>
           <div class="chat-block__tools">
-            <button class="chat-block__toggler" id="chat-block-toggler"></button>
             <button class="chat-block__rotation-lock" id="rotation-lock"></button>
+            <button class="chat-block__search-music-button" id="search-music-button">
+              <div class="rhythm">
+                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path class="bar1" fill="#fff" d="M14 2h3.984v18H14" />
+                  <path class="bar2" fill="#fff" d="M8 20V2h3.984v18" />
+                  <path class="bar3" fill="#fff" d="M2 20V2h3.984v18" />
+                </svg>
+              </div>
+            </button>
+            <button class="chat-block__toggler" id="chat-block-toggler"></button>
           </div>
           <div class="chat-block__header user">
             <div class="user__name" id="my-name">
@@ -122,24 +131,39 @@
         </div>
       </div>
     </div>
-    <div class="modal-content-bundle">
-      <div class="modal modal-alert" role="alert" id="modal-alert">
-        <div class="modal__inner">
+    <div class="modal-bundle">
+      <div class="modal-music-search " role="music-search" id="modal-music-search">
+        <div class="modal-music-search__inner">
+          <a href="#0" class="modal-music-search__close img-replace" action="close">Close</a>
+          <div class="modal-music-search__header">
+            <input type="text" id="music-search-input" placeholder="Search on Soundcloud...">
+            <button action="search">search</button>
+          </div>
+          <div class="modal-music-search__body">
+            <ul class="modal-music-search__ul">
+
+            </ul>
+          </div>
+        </div> <!-- modal-music-search-container -->
+      </div> <!-- modal-music-search -->
+      <div class="modal-prompt modal-prompt--alert" role="alert" id="modal-alert">
+        <div class="modal-prompt__inner">
           <p></p>
-          <ul class="modal__buttons">
-            <li><a href="#0" option="close">OK</a></li>
+          <ul class="modal-prompt__buttons">
+            <li><a href="#0" action="close">OK</a></li>
           </ul>
-          <a href="#0" class="modal__close img-replace" option="close">Close</a>
-        </div> <!-- modal-container -->
-      </div> <!-- modal -->
-      <div class="modal modal-confirm" role="confirm" id="modal-confirm">
-        <div class="modal__inner">
+          <a href="#0" class="modal-prompt__close img-replace" action="close">Close</a>
+        </div> <!-- modal-prompt-container -->
+      </div> <!-- modal-prompt -->
+
+      <div class="modal-prompt modal-prompt--confirm" role="confirm" id="modal-confirm">
+        <div class="modal-prompt__inner">
           <p></p>
-          <ul class="modal__buttons">
-            <li><a href="#0" option="yes">Yes</a></li>
-            <li><a href="#0" option="no">No</a></li>
+          <ul class="modal-prompt__buttons">
+            <li><a href="#0" action="yes">Yes</a></li>
+            <li><a href="#0" action="no">No</a></li>
           </ul>
-          <a href="#0" class="modal__close img-replace" option="close">Close</a>
+          <a href="#0" class="modal-prompt__close img-replace" action="close">Close</a>
         </div> <!-- modal-container -->
       </div> <!-- modal -->
     </div>

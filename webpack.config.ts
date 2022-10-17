@@ -209,6 +209,15 @@ const config = (env: any, argv: any): webpack.Configuration => {
       ]
     },
     resolve: {
+      fallback: {
+        "url": require.resolve("url/"),
+        "assert": require.resolve("assert/"),
+        "stream": require.resolve("stream-browserify"),
+        "https": require.resolve("https-browserify"),
+        "http": require.resolve("stream-http"),
+        "zlib": require.resolve("browserify-zlib"),
+        "buffer": require.resolve("buffer/")
+      },
       extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
       alias: {
         '@img': resolve(__dirname, './src/assets/images/'),
@@ -238,7 +247,10 @@ const config = (env: any, argv: any): webpack.Configuration => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'PROCESS.MODE': JSON.stringify(argv.mode)
+        'PROCESS.MODE': JSON.stringify(argv.mode),
+      }),
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
       }),
       new MiniCssExtractPlugin({
         filename: 'css/[name].css'

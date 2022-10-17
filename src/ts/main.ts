@@ -2,8 +2,8 @@ import { Base } from './class/base';
 import { io, Socket } from 'socket.io-client';
 import { trim } from 'lodash';
 import { ShowScreenTargets } from './interface';
-import { createElementFromHTML } from './dom/lib/function';
-import { doAlert, doConfirm } from './dom/lib/service';
+import { createElementFromHTML } from './lib/function';
+import { doAlert, doConfirm, searchMusic } from './lib/service';
 class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
@@ -45,6 +45,7 @@ class Main extends Base {
         const loginBtn = this.chatBlock.querySelector('#login-button');
         const sendBtn = this.chatBlock.querySelector('#send-message-button');
         const logoutBtn = this.chatBlock.querySelector('#logout-button');
+        const musicBtn = this.chatBlock.querySelector('#search-music-button');
         const panelToggle = () => {
             let showTarget: ShowScreenTargets
             if (this.chatBlockActive) {
@@ -120,6 +121,10 @@ class Main extends Base {
                 /*觸發 logout 事件*/
                 this.socket.emit('logout', { username: this.myName });
             }
+        })
+
+        musicBtn.addEventListener('click', async () => {
+            await searchMusic();
         })
 
         document.addEventListener('keydown', (evt: KeyboardEvent) => {

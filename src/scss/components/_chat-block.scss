@@ -1,7 +1,7 @@
 @mixin toggler() {
-  position: absolute;
-  width: 50px;
-  height: 50px;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -52,15 +52,24 @@
     box-shadow: 19px -1px 30px -17px rgba(0, 0, 0, 0.5) inset;
   }
 
-  &__tools{
+  &__tools {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    width: 70px;
+    height: 100%;
     z-index: 5;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
   }
 
-  &__tools >*+*{
-     margin-top: 20px;
+  &__tools>*+* {
+    margin-top: 20px;
   }
 
   &__toggler {
@@ -83,13 +92,94 @@
     &:after {
       opacity: 0.5;
       transition: opacity 500ms, transform 500ms;
-      background-image: url(~@img/rotation-lock-n.png);
+      background-image: url(~@img/rotation-lock-n.svg);
 
     }
 
   }
 
-  &__rotation-lock--active {
+  &__search-music-button {
+    @include toggler();
+
+
+    &:before {
+      background-image: url(~@img/headphone.svg);
+      background-size: cover;
+      width: 90%;
+      height: 73%;
+      transform: scale(0.6);
+      top: -10%;
+      margin: auto;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    >* {
+      position: absolute;
+      transition: opacity 500ms;
+      opacity: 0.5;
+      left: 50%;
+      top: 55%;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+
+
+    svg {
+      path:nth-child(1) {
+        animation: bar1 .6s infinite alternate;
+        transform: translateY(20%);
+        animation-delay: 0.4s;
+      }
+
+      path:nth-child(2) {
+        animation: bar2 .3s infinite alternate;
+        animation-delay: 0.3s;
+      }
+
+      path:nth-child(3) {
+        animation: bar3 .4s infinite alternate;
+        transform: translateY(50%);
+        animation-delay: 0.5s;
+      }
+    }
+
+
+    @keyframes bar1 {
+      0% {
+        transform: translateY(40%);
+      }
+
+      100% {
+        transform: translateY(0%);
+      }
+    }
+
+    @keyframes bar2 {
+      0% {
+        transform: translateY(30%);
+      }
+
+      100% {
+        transform: translateY(0%);
+      }
+    }
+
+    @keyframes bar3 {
+      0% {
+        transform: translateY(60%);
+      }
+
+      100% {
+        transform: translateY(0%);
+      }
+    }
+  }
+
+
+  &__rotation-lock--active,
+  &__rotation-lock:hover {
     background-color: gray;
     opacity: 0.5;
 
@@ -106,6 +196,16 @@
     }
   }
 
+
+  &__search-music-button--active,
+  &__search-music-button:hover {
+
+    >*,
+    &:before {
+      opacity: 0.75;
+    }
+
+  }
 
 
 
