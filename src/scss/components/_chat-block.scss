@@ -4,10 +4,6 @@
   height: 50px;
   border: none;
   cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 5;
   background-color: transparent;
   background-color: rgb(34, 34, 34);
   border-radius: 50%;
@@ -56,9 +52,19 @@
     box-shadow: 19px -1px 30px -17px rgba(0, 0, 0, 0.5) inset;
   }
 
+  &__tools{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5;
+  }
+
+  &__tools >*+*{
+     margin-top: 20px;
+  }
+
   &__toggler {
     @include toggler();
-
   }
 
   &__toggler:hover::before {
@@ -67,7 +73,6 @@
 
   &__rotation-lock {
     @include toggler();
-    bottom: 90px;
     transition: background-color 500ms, opacity 500ms;
 
     &:before {
