@@ -1,8 +1,7 @@
 import { Env } from "./env";
 import { Base } from "./base";
-import { Clock } from "three";
 import { Cube } from "../mesh";
-import { DomCube } from "./dom-cube";
+import { DomCube } from "../mesh/dom-cube";
 import { EventEmitter } from "../util";
 
 export class Playground extends EventEmitter {

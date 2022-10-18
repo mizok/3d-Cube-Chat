@@ -1,5 +1,5 @@
 import { Group } from "three";
-import { Base } from "./base";
+import { Base } from "../class/base";
 import { Chat } from '../dom';
 import { SpaceInvader } from '../dom/space-inavader';
 import gsap from "gsap";

@@ -5,7 +5,7 @@ import { Base } from './base';
 export class Camera {
     instance: PerspectiveCamera;
     controls: OrbitControls;
-    bestPoint = new Vector3(-8, 1, 5.6);
+    bestPoint = new Vector3(-8, 1, 8);
     minimunDrawbackAngle = Math.PI / 3;
     private sizer = this.base.sizer;
     private canvas = this.base.domCanvas;

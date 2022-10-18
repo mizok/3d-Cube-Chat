@@ -1,10 +1,14 @@
 .music-iframe {
     width: 350px;
+    will-change: transform;
+    transform: translateZ(0);
 
     iframe {
         border-radius: 8px;
         opacity: 0.45;
         transition: opacity 500ms;
+        position: relative;
+        transform: translateZ(0);
 
         &:hover {
             opacity: 0.75;

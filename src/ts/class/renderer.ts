@@ -22,7 +22,8 @@ export class Renderer {
         //instance
         this.instance = new WebGLRenderer({
             canvas: this.canvas,
-            antialias: true
+            antialias: true,
+            preserveDrawingBuffer: true
         })
         this.instance.physicallyCorrectLights = true
         this.instance.toneMappingExposure = 1.75
@@ -52,4 +53,5 @@ export class Renderer {
         this.instance.render(this.scene, this.camera.instance);
         this.instance2.render(this.scene2, this.camera.instance);
     }
+
 }
