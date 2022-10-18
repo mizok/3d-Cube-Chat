@@ -96,7 +96,7 @@ xpopup
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(31, 31, 31, 0.8);
+        background: rgba(31, 31, 31, 0.9);
         border-radius: 20px;
         text-align: center;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -121,6 +121,11 @@ xpopup
         transform: translate(30%, -30%);
         border-radius: 50%;
 
+        @include rwd($screen-pad-portrait) {
+            width: 30px;
+            height: 30px;
+        }
+
         &:before,
         &:after {
             background-color: #fff;
@@ -128,9 +133,48 @@ xpopup
         }
     }
 
-    &__header {}
+    &__header {
+        padding: 30px;
+        background-color: rgba(128, 128, 128, 0.482);
 
-    &__body {}
+        @include rwd($screen-pad-portrait) {
+            padding: 20px;
+        }
+    }
+
+    &__header .input-block {
+        max-width: 600px;
+        position: relative;
+        margin: 0 auto;
+
+        input {
+            font-size: 1.5rem;
+
+            @include rwd($screen-pad-portrait) {
+                font-size: 1rem;
+            }
+        }
+
+    }
+
+    &__header .input-block__button {
+        width: 30px;
+        height: 30px;
+
+        @include rwd($screen-pad-portrait) {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__body {
+        border-top: 1px solid gray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+    }
 
 
     &__inner &__header {
@@ -141,4 +185,249 @@ xpopup
         flex: 1;
     }
 
+
+
+    &__no-result {
+        display: none;
+    }
+
+    &__ul:not(:empty) {
+        padding-left: 50px;
+        padding-right: 50px;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        @include custom-scroll();
+
+        @include rwd($screen-pad-portrait) {
+            padding-left: 20px;
+            padding-right: 10px;
+        }
+
+
+        &:before,
+        &:after {
+            content: '';
+            display: block;
+            height: 50px;
+            width: 100%;
+
+            @include rwd($screen-pad-portrait) {
+                height: 30px;
+            }
+
+        }
+    }
+
+    &__ul:empty {
+        height: auto;
+    }
+
+    &__ul:empty+&__no-result {
+        display: block;
+    }
+
+    &__li {
+        opacity: 0;
+        animation: fadeIndownSmall 500ms forwards;
+
+    }
+
+    &__li+&__li {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+
+}
+
+.music-search-item {
+    user-select: none;
+
+    &__inner {
+        display: flex;
+        padding: 20px;
+        align-items: center;
+
+        @include rwd($screen-pad-portrait) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &__img {
+        width: 100px;
+        border-radius: 50%;
+        opacity: 0.5;
+        transition: opacity 500ms;
+        overflow: hidden;
+        flex: none;
+        position: relative;
+
+        @include rwd($screen-pad-portrait) {
+            width: 50px;
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            padding-bottom: 100%;
+        }
+
+        img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+    }
+
+    &__img--not-found {
+        background-image: url(~@img/not-found.jpg);
+        background-size: cover;
+        background-position: center;
+
+        img {
+            opacity: 0;
+        }
+    }
+
+    &:hover &__img {
+        opacity: 1;
+    }
+
+    &__head {
+        flex: none;
+    }
+
+    &__head+&__body {
+        margin-left: 50px;
+
+        @include rwd($screen-pad-portrait) {
+            margin-left: 20px;
+        }
+
+    }
+
+    &__body {
+        text-align: left;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    &__body+&__play {
+        margin-left: 50px;
+
+        @include rwd($screen-pad-portrait) {
+            margin-left: 20px;
+        }
+    }
+
+    &__play {
+        width: 30px;
+        height: 30px;
+        flex: none;
+        border-radius: 50%;
+        background-image: url(~@img/play.svg);
+        background-size: cover;
+        opacity: 0.35;
+        transition: opacity 500ms;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    &:hover &__play {
+        opacity: 0.5;
+    }
+
+    &__title {
+        position: relative;
+        display: inline-flex;
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 1);
+        font-family: 'Roboto Condensed';
+        font-weight: 300;
+        text-align: left;
+        opacity: 0.5;
+        transition: opacity 500ms;
+        width: 100%;
+
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        @include rwd($screen-pad-portrait) {
+            font-size: 1rem;
+        }
+    }
+
+
+    &:hover &__title {
+        opacity: 0.75;
+
+        @include rwd($screen-pad-portrait) {
+
+            span {
+                text-overflow: clip;
+                overflow: visible;
+                display: inline-block;
+                animation: marquee 10s linear infinite;
+            }
+
+        }
+    }
+
+    &__title+&__descrp {
+        margin-top: 20px;
+
+        @include rwd($screen-pad-portrait) {
+            margin-top: 10px;
+        }
+    }
+
+    &__descrp {
+        display: flex;
+        align-items: center;
+        color: $white;
+    }
+
+    &__artist,
+    &__album-title {
+        font-size: 14px;
+        opacity: 0.5;
+        transition: opacity 500ms;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 12em;
+
+        @include rwd($screen-pad-portrait) {
+            font-size: 12px;
+        }
+    }
+
+
+
+    &:hover &__artist,
+    &:hover &__album-title {
+        opacity: 0.75;
+    }
+
+    &__artist+&__album-title:not(:empty) {
+        display: flex;
+        align-items: center;
+
+        &:before {
+            content: '-';
+            display: block;
+            font-size: 1rem;
+            margin: 0 10px;
+
+            @include rwd($screen-pad-portrait) {
+                margin: 0 3px;
+            }
+        }
+    }
 }

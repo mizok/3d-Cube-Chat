@@ -74,11 +74,46 @@ export function searchMusic() {
             cusRes(false);
         }
         else if (action === 'search') {
+            const container = frame.querySelector('#search-music-result');
             const keyword = (frame.querySelector('#music-search-input') as HTMLInputElement).value;
-            const searchResult = await soundCloudService.search({
-                q: keyword
+            const searchResult: any = await soundCloudService.search({
+                q: keyword,
+                limit: 50
             });
-            console.log(searchResult)
+            const embedableTracks = searchResult?.collection.filter((o: any) => {
+                return o.embeddable_by === 'all'
+            })
+            console.log(embedableTracks)
+
+
+            const htmlBundle = embedableTracks.map((o: any, index: number) => {
+                return `
+                <li class="modal-music-search__li music-search-item" style="animation-delay:${100 * index}ms">
+                    <div class="music-search-item__inner">
+                        <div class="music-search-item__head">
+                            <div class="music-search-item__img">
+                                <img src="${o.artwork_url}" onerror="this.parentNode.classList.add('music-search-item__img--not-found')" >
+                            </div>
+                        </div>
+                        <div class="music-search-item__body">
+                            <div class="music-search-item__title">
+                                <span>${o.title}</span>
+                            </div>
+                            <div class="music-search-item__descrp">
+                                <div class="music-search-item__artist">
+                                ${o.publisher_metadata?.artist || 'Unknown'}
+                                </div>
+                                <div class="music-search-item__album-title">${o.publisher_metadata?.album_title || ''}</div>
+                            </div>
+                        </div>
+                        <button class="music-search-item__play" action="choose" data-id="${o.id}">
+                        </button>
+                    </div>
+                </li>
+                `
+            }).join('');
+            container.scrollTop = 0;
+            container.innerHTML = htmlBundle;
 
         }
         else if (action === 'choose') {

@@ -7,7 +7,7 @@ $input-text-active: #BFD2FF;
 .input-block {
   position: relative;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   width: 100%;
   margin: 0 auto;
   border-radius: 2px;
@@ -58,6 +58,7 @@ $input-text-active: #BFD2FF;
     opacity: 0.5;
     transition: opacity 500ms;
     cursor: pointer;
+    font-size: 0;
 
     &:hover {
       opacity: 0.75;

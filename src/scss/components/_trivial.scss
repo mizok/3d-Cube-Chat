@@ -1,1 +1,40 @@
-.rhythm {}
+.no-result {
+    color: rgba(255, 255, 255, 1);
+    opacity: 0.1;
+
+    * {
+        font-weight: 100;
+    }
+
+    &__img {
+        width: 250px;
+        position: relative;
+        margin: 0 auto;
+
+        @include rwd($screen-pad-portrait) {
+            width: 150px;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__img+&__title {
+        margin-top: 50px;
+    }
+
+    &__title {
+        font-size: 30px;
+        line-height: 1.5;
+    }
+
+    &__title+&__descrp {
+        margin-top: 30px;
+    }
+
+    &__descrp {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}

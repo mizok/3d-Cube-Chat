@@ -452,6 +452,10 @@
   /* Chrome, Edge, and Safari */
   &::-webkit-scrollbar {
     width: 16px;
+
+    @include rwd($screen-pad-portrait) {
+      width: 12px;
+    }
   }
 
   &::-webkit-scrollbar-track {

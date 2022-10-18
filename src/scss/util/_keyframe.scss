@@ -71,3 +71,32 @@
     transform: translateY(0%)
   }
 }
+
+
+@keyframes fadeIndownMedium {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%)
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%)
+  }
+}
+
+
+@keyframes marquee {
+  0% {
+    opacity: 0;
+    transform: translateX(0%);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}

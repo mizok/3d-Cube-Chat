@@ -136,13 +136,27 @@
         <div class="modal-music-search__inner">
           <a href="#0" class="modal-music-search__close img-replace" action="close">Close</a>
           <div class="modal-music-search__header">
-            <input type="text" id="music-search-input" placeholder="Search on Soundcloud...">
-            <button action="search">search</button>
+            <div class="chat-block__input input-block">
+              <input type="text" class="input-block__input" id="music-search-input"
+                placeholder="Search on Soundcloud...">
+              <button class="input-block__button" action="search">
+                <img src="~@img/search.svg" alt="">
+              </button>
+            </div>
           </div>
           <div class="modal-music-search__body">
-            <ul class="modal-music-search__ul">
+            <ul class="modal-music-search__ul" id="search-music-result">
 
             </ul>
+            <div class="modal-music-search__no-result no-result">
+              <div class="no-result__img">
+                <img src="~@img/no-result.svg" alt="">
+              </div>
+              <div class="no-result__title">No Result Found.</div>
+              <div class="no-result__descrp">
+                I am sorry for what you're looking for.<br>Maybe try another keyword?
+              </div>
+            </div>
           </div>
         </div> <!-- modal-music-search-container -->
       </div> <!-- modal-music-search -->
