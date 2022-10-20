@@ -79,10 +79,20 @@ export function searchMusic(): Promise<false | string> {
             if (!soundCloudService) return;
             const container = frame.querySelector('#search-music-result');
             const keyword = (frame.querySelector('#music-search-input') as HTMLInputElement).value;
+            container.innerHTML = `
+            <li class="modal-music-search__li modal-music-search__li--loading">
+               <img src="./assets/images/ripple.svg">
+            </li>
+            `
+
             const searchResult: any = await soundCloudService.search({
                 q: keyword,
                 limit: 50
+            }).then((searchResult) => {
+                widget.trigger('search', [searchResult])
+                return searchResult;
             });
+
             const embedableTracks = searchResult?.collection.filter((o: any) => {
                 return o.embeddable_by === 'all'
             })

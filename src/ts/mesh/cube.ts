@@ -59,7 +59,20 @@ export class Cube implements MeshType {
     }
 
     showChat() {
-
+        gsap.to(this.base.camera.instance.position, {
+            x: this.base.camera.bestPoint.x,
+            y: this.base.camera.bestPoint.y,
+            z: this.base.camera.bestPoint.z,
+            duration: 4,
+            onStart: () => {
+                this.base.camera.controls.enabled = false;
+                this.base.camera.controls.enableDamping = false;
+            },
+            onComplete: () => {
+                this.base.camera.controls.enabled = true;
+                this.base.camera.controls.enableDamping = true;
+            }
+        })
         gsap.to(this.mesh.rotation, cubeLikeConfig.showChatAnimationInnerRotationConfig)
         const angle = getTargetAngle(this.group.rotation.y)
         gsap.to(this.group.rotation, {
@@ -69,18 +82,7 @@ export class Cube implements MeshType {
             duration: 2
         })
 
-        gsap.to(this.base.camera.instance.position, {
-            x: this.base.camera.bestPoint.x,
-            y: this.base.camera.bestPoint.y,
-            z: this.base.camera.bestPoint.z,
-            duration: 2,
-            onStart: () => {
-                this.base.camera.controls.enabled = false;
-            },
-            onComplete: () => {
-                this.base.camera.controls.enabled = true;
-            }
-        })
+
 
     }
 

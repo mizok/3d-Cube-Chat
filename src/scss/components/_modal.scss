@@ -231,6 +231,16 @@ xpopup
         opacity: 0;
         animation: fadeIndownSmall 500ms forwards;
 
+        &--loading {
+            position: relative;
+            top: calc(50% - 50px);
+            width: 200px;
+            height: 200px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: none;
+            opacity: 0.35;
+        }
     }
 
     &__li+&__li {
