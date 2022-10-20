@@ -1,5 +1,7 @@
+import { widget } from '../lib/widget'
 import { SoundCloudService } from './soundcloud-service';
 const soundCloudService = new SoundCloudService({ clientId: 'jOJjarVXJfZlI309Up55k93EUDG7ILW6' })
+
 
 export function doConfirm(template: string) {
     const frame = document.querySelector('#modal-confirm');
@@ -56,12 +58,12 @@ export function doAlert(template: string) {
     frame.addEventListener('click', cb);
 }
 
-export function searchMusic() {
+export function searchMusic(): Promise<false | string> {
     const frame = document.querySelector('#modal-music-search');
     const activeClass = 'modal-music-search--active';
-    let cusRes: any;
+    let cusRes: (value: (false | string)) => void;
     let chosenId: string;
-    const prm = new Promise((res, rej) => {
+    const prm = new Promise((res: (value: (false | string)) => void, rej) => {
         cusRes = res;
     })
     const cb = async (e: MouseEvent) => {
@@ -74,6 +76,7 @@ export function searchMusic() {
             cusRes(false);
         }
         else if (action === 'search') {
+            if (!soundCloudService) return;
             const container = frame.querySelector('#search-music-result');
             const keyword = (frame.querySelector('#music-search-input') as HTMLInputElement).value;
             const searchResult: any = await soundCloudService.search({
@@ -83,9 +86,6 @@ export function searchMusic() {
             const embedableTracks = searchResult?.collection.filter((o: any) => {
                 return o.embeddable_by === 'all'
             })
-            console.log(embedableTracks)
-
-
             const htmlBundle = embedableTracks.map((o: any, index: number) => {
                 return `
                 <li class="modal-music-search__li music-search-item" style="animation-delay:${100 * index}ms">
@@ -117,7 +117,7 @@ export function searchMusic() {
 
         }
         else if (action === 'choose') {
-            chosenId = actionTarget.getAttribute('dataId') || '';
+            chosenId = actionTarget.getAttribute('data-id') || '';
             e.currentTarget.removeEventListener('click', cb);
             frame.classList.remove(activeClass);
             cusRes(chosenId);
@@ -129,5 +129,11 @@ export function searchMusic() {
     return prm;
 }
 
-
-
+export function playViaIframe(trackId: string) {
+    const source = `https%3A//api.soundcloud.com/tracks/${trackId}`
+    widget.load(source).then(
+        () => {
+            widget.play();
+        }
+    )
+}

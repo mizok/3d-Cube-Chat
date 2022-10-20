@@ -22,7 +22,6 @@ export class SpaceInvader implements FaceType {
         this.object.position.set(0, 0, -this.offset);
         this.object.rotation.y = - Math.PI;
         this.object.scale.set(1 / 160, 1 / 160, 1);
-
     }
 
     update() {

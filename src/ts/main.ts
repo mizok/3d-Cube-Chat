@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import { trim } from 'lodash';
 import { ShowScreenTargets } from './interface';
 import { createElementFromHTML } from './lib/function';
-import { doAlert, doConfirm, searchMusic } from './lib/service';
+import { doAlert, doConfirm, playViaIframe, searchMusic } from './lib/service';
 class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
@@ -124,7 +124,10 @@ class Main extends Base {
         })
 
         musicBtn.addEventListener('click', async () => {
-            await searchMusic();
+            const dataId = await searchMusic();
+            if (dataId) {
+                playViaIframe(dataId);
+            }
         })
 
         document.addEventListener('keydown', (evt: KeyboardEvent) => {

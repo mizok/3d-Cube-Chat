@@ -2,7 +2,8 @@ import { Matrix4, Object3D, Vector3 } from "three";
 import { CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
 import { Base } from "../class/base";
 import { FaceType } from "../interface";
-import { pad, updateOcclude } from "../lib/function";
+import { updateOcclude } from "../lib/function";
+import { widget } from '../lib/widget';
 
 export class Music implements FaceType {
     object: Object3D
@@ -18,14 +19,19 @@ export class Music implements FaceType {
         this.setElement();
     }
     setElement() {
-        this.element = this.base.domBundle.querySelector('#music');
+        this.element = this.base.domBundle.querySelector('#music-player');
         this.object = new CSS3DObject(this.element);
         this.object.position.set(this.offset, 0, 0);
         this.object.rotation.y = Math.PI / 2;
         this.object.scale.set(1 / 160, 1 / 160, 1);
+        this.bindPlayerUIEvent();
     }
 
-
+    private bindPlayerUIEvent() {
+        widget.on('load', (soundObject: any) => {
+            console.log(soundObject);
+        })
+    }
 
     update() {
         updateOcclude(this);

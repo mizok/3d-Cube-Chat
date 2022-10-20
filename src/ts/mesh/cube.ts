@@ -73,7 +73,13 @@ export class Cube implements MeshType {
             x: this.base.camera.bestPoint.x,
             y: this.base.camera.bestPoint.y,
             z: this.base.camera.bestPoint.z,
-            duration: 4,
+            duration: 2,
+            onStart: () => {
+                this.base.camera.controls.enabled = false;
+            },
+            onComplete: () => {
+                this.base.camera.controls.enabled = true;
+            }
         })
 
     }

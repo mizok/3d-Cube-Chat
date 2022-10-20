@@ -65,6 +65,8 @@
     "gsap": "^3.11.3",
     "lodash": "^4.17.21",
     "socket.io-client": "^4.5.2",
+    "soundcloud-key-fetch": "^1.0.13",
+    "soundcloud-widget": "^0.2.1",
     "three": "^0.145.0"
   },
   "browserslist": [

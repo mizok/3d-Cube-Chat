@@ -1,17 +1,20 @@
 .music-iframe {
-    width: 350px;
+    position: absolute;
+    left: -1000vw !important;
     will-change: transform;
     transform: translateZ(0);
 
     iframe {
-        border-radius: 8px;
-        opacity: 0.45;
-        transition: opacity 500ms;
-        position: relative;
-        transform: translateZ(0);
-
-        &:hover {
-            opacity: 0.75;
-        }
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateZ(0) !important;
     }
+}
+
+.music-player {
+    width: 380px;
+    height: 380px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
