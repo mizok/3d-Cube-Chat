@@ -16,6 +16,7 @@ class Main extends Base {
     constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement) {
         super(canvas, domCanvas, domBundle);
         this.initChatUI();
+        this.initMusicUI();
     }
 
     toggleRotationLockFromUI(): void {
@@ -26,9 +27,9 @@ class Main extends Base {
         else {
             this.rotationLock.classList.add('chat-block__rotation-lock--active');
         }
-
         this.setRotationLock(!status)
     }
+
     setRotationLockFromUI(status: boolean): void {
         if (status) {
             this.rotationLock.classList.add('chat-block__rotation-lock--active');
@@ -45,7 +46,6 @@ class Main extends Base {
         const loginBtn = this.chatBlock.querySelector('#login-button');
         const sendBtn = this.chatBlock.querySelector('#send-message-button');
         const logoutBtn = this.chatBlock.querySelector('#logout-button');
-        const musicBtn = this.chatBlock.querySelector('#search-music-button');
         const panelToggle = () => {
             let showTarget: ShowScreenTargets
             if (this.chatBlockActive) {
@@ -123,12 +123,7 @@ class Main extends Base {
             }
         })
 
-        musicBtn.addEventListener('click', async () => {
-            const dataId = await searchMusic();
-            if (dataId) {
-                playViaIframe(dataId);
-            }
-        })
+
 
         document.addEventListener('keydown', (evt: KeyboardEvent) => {
             if (evt.keyCode == 13) {
@@ -137,6 +132,33 @@ class Main extends Base {
         })
 
     }
+
+    private initMusicUI() {
+        const musicBtn = this.chatBlock.querySelector('#search-music-button');
+        let stopRotationTimeOut: any;
+
+        musicBtn.addEventListener('click', async () => {
+
+            this.setRotationLockFromUI(true);
+            this.playground.showMusic();
+
+            await searchMusic().then((data) => {
+                if (data) {
+                    playViaIframe(data).then(() => {
+                        clearTimeout(stopRotationTimeOut);
+                        stopRotationTimeOut = setTimeout(() => {
+                            this.setRotationLockFromUI(false);
+                        }, 1000)
+                    });
+                } else {
+                    this.setRotationLockFromUI(false);
+                }
+            })
+
+
+        })
+    }
+
     private initChatSocket() {
         /*登入成功*/
         this.socket.on('loginSuccess', (data) => {

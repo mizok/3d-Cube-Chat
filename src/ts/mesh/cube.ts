@@ -86,6 +86,32 @@ export class Cube implements MeshType {
 
     }
 
+    showMusic() {
+        gsap.to(this.base.camera.instance.position, {
+            x: this.base.camera.bestPoint.x,
+            y: this.base.camera.bestPoint.y,
+            z: this.base.camera.bestPoint.z,
+            duration: 4,
+            onStart: () => {
+                this.base.camera.controls.enabled = false;
+                this.base.camera.controls.enableDamping = false;
+            },
+            onComplete: () => {
+                this.base.camera.controls.enabled = true;
+                this.base.camera.controls.enableDamping = true;
+            }
+        })
+        gsap.to(this.mesh.rotation, cubeLikeConfig.showMusicAnimationInnerRotationConfig)
+        const angle = getTargetAngle(this.group.rotation.y)
+        gsap.to(this.group.rotation, {
+            x: 0,
+            y: angle - Math.PI / 4,
+            z: 0,
+            duration: 2
+        })
+
+    }
+
     update(delta: number) {
         if (!this.base.touched && !this.base.getRotationLockStatus()) {
             this.group.rotation.y += delta / cubeLikeConfig.updateParameter;

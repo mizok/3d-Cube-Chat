@@ -20,12 +20,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.5;
+    opacity: 0.35;
     transition: opacity 500ms;
     border-top: 5px solid #ff5500;
 
     &:hover {
-        opacity: 0.75;
+        opacity: 0.5;
     }
 
     &__img {
@@ -33,6 +33,7 @@
         height: 100%;
         position: absolute;
         background-size: cover;
+        background-position: center;
         top: 0;
         left: 0;
         z-index: 1;

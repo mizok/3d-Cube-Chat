@@ -8,7 +8,7 @@ export class SoundCloudService {
 
     search(params: { q: string, limit?: number, client_id?: string }) {
         return new Promise((resolve, reject) => {
-            const type = '/search/tracks';
+            const type = '/search';
             const cors = `https://cors-proxy-server.onrender.com/`;
             params.client_id = params.client_id ? params.client_id : this.config.clientId;
             const urlParameters = Object.entries(params)

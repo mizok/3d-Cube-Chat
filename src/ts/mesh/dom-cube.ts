@@ -50,6 +50,16 @@ export class DomCube {
             duration: 2
         })
     }
+    showMusic() {
+        gsap.to(this.groupInner.rotation, cubeLikeConfig.showMusicAnimationInnerRotationConfig);
+        const angle = getTargetAngle(this.groupOuter.rotation.y)
+        gsap.to(this.groupOuter.rotation, {
+            x: 0,
+            y: angle - Math.PI / 4,
+            z: 0,
+            duration: 2
+        })
+    }
 
     update(delta: number) {
         if (!this.base.touched && !this.base.getRotationLockStatus()) {

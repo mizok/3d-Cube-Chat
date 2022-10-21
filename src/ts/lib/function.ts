@@ -36,6 +36,12 @@ export const cubeLikeConfig = {
     z: 0,
     duration: 2
   },
+  showMusicAnimationInnerRotationConfig: {
+    x: 0,
+    y: -Math.PI / 4,
+    z: 0,
+    duration: 2
+  },
   showChatAnimationOuterRotationConfig: {
     x: 0,
     y: 0,

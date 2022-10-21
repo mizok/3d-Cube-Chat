@@ -15,6 +15,7 @@ export class Music implements FaceType {
     private cPos = new Vector3();
     private m4 = new Matrix4();
     private timer: any;
+    private defaultSource = 'https%3A//api.soundcloud.com/tracks/327386009'
     constructor(private base: Base) {
         this.setElement();
     }
@@ -24,11 +25,18 @@ export class Music implements FaceType {
         this.object.position.set(this.offset, 0, 0);
         this.object.rotation.y = Math.PI / 2;
         this.object.scale.set(1 / 160, 1 / 160, 1);
-        this.bindPlayerUIEvent();
+        this.init();
     }
 
     private bindPlayerUIEvent() {
+        const playButton = this.element.querySelector('#music-player-button') as HTMLElement;
+
+        playButton.addEventListener('pointerdown', () => {
+            widget.play()
+        })
+
         widget.on('load', (soundObject: any) => {
+            console.log(soundObject)
             let picUrl = '';
             if (!!soundObject.artwork_url) {
                 picUrl = soundObject.artwork_url.replace(/(.*)(-large)(\.[a-z0-9]{3}[a-z0-9]?)$/, '$1-t500x500$3')
@@ -39,6 +47,13 @@ export class Music implements FaceType {
             const banner = this.element.querySelector('.music-player__img') as HTMLElement;
             banner.style.backgroundImage = `url(${picUrl})`
         })
+
+
+    }
+
+    private init() {
+        this.bindPlayerUIEvent();
+        widget.load(this.defaultSource)
     }
 
     update() {

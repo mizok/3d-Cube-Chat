@@ -34,6 +34,11 @@ export class Playground extends EventEmitter {
         }
     }
 
+    showMusic() {
+        this.cube.showMusic()
+        this.domCube.showMusic()
+    }
+
     update(delta: number) {
         if (this.ready) {
             this.env.update(delta);

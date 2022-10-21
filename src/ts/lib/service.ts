@@ -79,15 +79,15 @@ export function searchMusic(): Promise<false | string> {
             if (!soundCloudService) return;
             const container = frame.querySelector('#search-music-result');
             const keyword = (frame.querySelector('#music-search-input') as HTMLInputElement).value;
+            if (!keyword) return;
             container.innerHTML = `
             <li class="modal-music-search__li modal-music-search__li--loading">
                <img src="./assets/images/ripple.svg">
             </li>
             `
-
             const searchResult: any = await soundCloudService.search({
                 q: keyword,
-                limit: 50
+                limit: 100
             }).then((searchResult) => {
                 widget.trigger('search', [searchResult])
                 return searchResult;
@@ -141,7 +141,7 @@ export function searchMusic(): Promise<false | string> {
 
 export function playViaIframe(trackId: string) {
     const source = `https%3A//api.soundcloud.com/tracks/${trackId}`
-    widget.load(source).then(
+    return widget.load(source).then(
         () => {
             widget.play();
         }

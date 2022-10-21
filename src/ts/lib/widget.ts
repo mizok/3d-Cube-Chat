@@ -16,11 +16,15 @@ class SCWidget extends EventEmitter {
     play() {
         this.instance.play();
     }
+    toggle() {
+        this.instance.toggle();
+    }
     load(url: string) {
         return this.instance.load(url, { auto_play: true }).then(() => {
             this.instance.getCurrentSound().then((soundObject: any) => {
                 this.trigger('load', [soundObject])
             })
+
         })
     }
 }
