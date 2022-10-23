@@ -89,14 +89,17 @@
 @keyframes marquee {
   0% {
     opacity: 0;
+    width: auto;
     transform: translateX(0%);
   }
 
   10% {
+    width: auto;
     opacity: 1;
   }
 
   100% {
+    width: auto;
     transform: translateX(-100%);
   }
 }

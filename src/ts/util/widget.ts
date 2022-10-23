@@ -12,12 +12,28 @@ class SCWidget extends EventEmitter {
         this.instance.on(SoundcloudWidget.events.PLAY, () => {
             this.trigger('play')
         })
+        this.instance.on(SoundcloudWidget.events.PLAY_PROGRESS, (ev: any) => {
+            const progressPercent = ev.relativePosition * 100;
+            this.trigger('play-progress', [progressPercent])
+        })
+        this.instance.on(SoundcloudWidget.events.PAUSE, () => {
+            this.trigger('pause')
+        })
+        this.instance.on(SoundcloudWidget.events.SEEK, (ev: any) => {
+            this.trigger('seek')
+        })
     }
     play() {
         this.instance.play();
     }
+    pause() {
+        this.instance.pause();
+    }
     toggle() {
         this.instance.toggle();
+    }
+    seek(millisecond: number) {
+        this.instance.seekTo(millisecond)
     }
     load(url: string) {
         return this.instance.load(url, { auto_play: true }).then(() => {

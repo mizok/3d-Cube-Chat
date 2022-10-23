@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { ExtrudeGeometry, Group, Mesh, MeshMatcapMaterial, Shape } from "three";
 import { Base } from "../class/base";
-import { cubeLikeConfig, getTargetAngle } from "../lib/function";
+import { cubeLikeConfig, getTargetAngle } from "../util/function";
 import { MeshType } from "../interface";
 
 export class Cube implements MeshType {

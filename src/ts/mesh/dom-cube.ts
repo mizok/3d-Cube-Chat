@@ -4,7 +4,7 @@ import { Chat } from '../dom';
 import { SpaceInvader } from '../dom/space-inavader';
 import gsap from "gsap";
 import { Clock } from "../dom/clock";
-import { cubeLikeConfig, getTargetAngle } from "../lib/function";
+import { cubeLikeConfig, getTargetAngle } from "../util/function";
 import { Music } from "../dom/music";
 
 export class DomCube {

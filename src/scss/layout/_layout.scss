@@ -60,6 +60,21 @@ $chatWidthMobile: 300px;
     position: relative;
     z-index: 2;
 
+    .music-player {
+      z-index: 4;
+    }
+
+    .chat-main {
+      z-index: 3;
+    }
+
+    .clock {
+      z-index: 2;
+    }
+
+    .space-invader {
+      z-index: 1;
+    }
 
   }
 
@@ -76,5 +91,11 @@ $chatWidthMobile: 300px;
 }
 
 .dom-bundle {
-  display: none !important;
+  position: absolute;
+  left: -1000vw !important;
+  transform: translateZ(0);
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateZ(0) !important;
 }

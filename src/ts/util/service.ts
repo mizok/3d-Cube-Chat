@@ -1,4 +1,4 @@
-import { widget } from '../lib/widget'
+import { widget } from '../util/widget'
 import { SoundCloudService } from './soundcloud-service';
 const soundCloudService = new SoundCloudService({ clientId: 'jOJjarVXJfZlI309Up55k93EUDG7ILW6' })
 
