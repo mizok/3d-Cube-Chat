@@ -8,6 +8,7 @@ class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
     private rotationLock: Element = this.chatBlock.querySelector('#rotation-lock');
+    private curtainCall: Element = document.querySelector('#curtain-call');
     private chatBlockActive = false;
     private socket: Socket;
     private myName: string;
@@ -15,9 +16,15 @@ class Main extends Base {
     // private path = 'http://192.168.1.101:5500';
     constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement) {
         super(canvas, domCanvas, domBundle);
+        this.init();
+    }
+
+    private init() {
+        this.initCurtainCall();
         this.initChatUI();
         this.initMusicUI();
     }
+
 
     toggleRotationLockFromUI(): void {
         const status = this.getRotationLockStatus();
@@ -39,6 +46,12 @@ class Main extends Base {
         }
 
         this.setRotationLock(status)
+    }
+
+    private initCurtainCall() {
+        this.playground.on('env-ready', () => {
+            this.curtainCall.classList.add('curtain-call--hide');
+        })
     }
 
     private initChatUI() {

@@ -62,7 +62,7 @@ export class Chat extends EventEmitter implements FaceType {
         containerEle.innerHTML = total;
     }
 
-    bindElementEvents() {
+    private bindElementEvents() {
         this.loginGuideBtn.addEventListener('pointerdown', () => {
             this.trigger('cube-login-button-click');
         })

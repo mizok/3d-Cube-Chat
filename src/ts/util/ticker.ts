@@ -10,7 +10,7 @@ export class Ticker extends EventEmitter {
         })
     }
 
-    tick() {
+    private tick() {
         this.trigger('tick', [this.clock])
 
         window.requestAnimationFrame(() => {

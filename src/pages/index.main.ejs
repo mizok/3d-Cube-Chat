@@ -67,10 +67,10 @@
               </div>
               <div class="author__latter">
                 <a href="#" class="author__link">
-                  <img src="~@img/github.svg" alt="">
+                  <img src="~@img/github.svg" alt="" draggable="false">
                 </a>
                 <a href="#" class="author__link">
-                  <img src="~@img/twitter.svg" alt="">
+                  <img src="~@img/twitter.svg" alt="" draggable="false">
                 </a>
               </div>
             </div>
@@ -110,7 +110,7 @@
       </div>
       <div class="music-player" id="music-player">
         <div class="music-player__img" id="music-player-img">
-          <img>
+          <img draggable="false">
         </div>
         <div class="music-player__inner">
           <div class="music-player__head">
@@ -138,7 +138,7 @@
               </div>
               <div class="music-player__credit">
                 <a href="#" id="music-player-perma-link">
-                  <img src="~@img/soundcloud-credit.png" alt="">
+                  <img src="~@img/soundcloud-credit.png" alt="" draggable="false">
                 </a>
               </div>
             </div>
@@ -173,7 +173,7 @@
               <input type="text" class="input-block__input" id="music-search-input"
                 placeholder="Search on Soundcloud...">
               <button class="input-block__button" action="search">
-                <img src="~@img/search.svg" alt="">
+                <img src="~@img/search.svg" alt="" draggable="false">
               </button>
             </div>
           </div>
@@ -182,7 +182,7 @@
             </ul>
             <div class="modal-music-search__no-result no-result">
               <div class="no-result__img">
-                <img src="~@img/no-result.svg" alt="">
+                <img src="~@img/no-result.svg" alt="" draggable="false">
               </div>
               <div class="no-result__title">No Result Found.</div>
               <div class="no-result__descrp">
@@ -216,6 +216,19 @@
     <div class="music-iframe" id="music-iframe">
       <iframe width="1" height="0" scrolling="no" frameborder="no" allow="autoplay" id="soundcloud-iframe"
         src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1493033761"></iframe>
+    </div>
+    <div class="curtain-call" id="curtain-call">
+      <div class="curtain-call__inner">
+        <div class="curtain-call__img">
+          <img src="~@img/logo.svg" alt="" draggable="false">
+        </div>
+        <div class="curtain-call__title">
+          3D-CUBE-CHAT
+        </div>
+        <div class="curtain-call__loading">
+
+        </div>
+      </div>
     </div>
   </body>
 

@@ -18,7 +18,7 @@ export class Renderer {
         this.setInstances()
     }
 
-    setInstances() {
+    private setInstances() {
         //instance
         this.instance = new WebGLRenderer({
             canvas: this.canvas,
@@ -41,7 +41,7 @@ export class Renderer {
         this.sizing();
     }
 
-    sizing() {
+    private sizing() {
         //instance
         this.instance.setSize(this.sizer.width, this.sizer.height);
         this.instance.setPixelRatio(this.sizer.pixelRatio);

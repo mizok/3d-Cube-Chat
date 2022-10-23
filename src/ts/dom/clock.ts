@@ -26,7 +26,7 @@ export class Clock implements FaceType {
         this.initClock();
     }
 
-    updateClock() {
+    private updateClock() {
         const now = new Date();
         const
             sec = now.getSeconds(),
@@ -42,7 +42,7 @@ export class Clock implements FaceType {
             this.element.querySelector(`#${tags[i]}`).innerHTML = corr[i].toString();
     }
 
-    initClock() {
+    private initClock() {
         this.updateClock();//先執行一次避免開場有破綻
         this.timer = setInterval(this.updateClock.bind(this), 1000);
     }

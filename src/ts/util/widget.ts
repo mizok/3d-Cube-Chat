@@ -8,7 +8,7 @@ class SCWidget extends EventEmitter {
         this.instance = new SoundcloudWidget(iframeEle);
         this.init();
     }
-    init() {
+    private init() {
         this.instance.on(SoundcloudWidget.events.PLAY, () => {
             this.trigger('play')
         })

@@ -18,7 +18,7 @@ export class Camera {
         this.setControls()
     }
 
-    setInstance() {
+    private setInstance() {
         const camera = new PerspectiveCamera(35, this.sizer.width / this.sizer.height, 0.1, 100);
         camera.position.set(this.bestPoint.x, this.bestPoint.y, this.bestPoint.z);
         this.instance = camera;
@@ -28,7 +28,7 @@ export class Camera {
 
     }
 
-    setControls() {
+    private setControls() {
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true;
         this.controls.enableZoom = false;

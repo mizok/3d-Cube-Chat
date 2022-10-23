@@ -10,7 +10,7 @@ export class Sizer extends EventEmitter {
         this.initSizingMechanic();
     }
 
-    initSizingMechanic() {
+    private initSizingMechanic() {
         this.sizing();
         window.addEventListener('resize', this.sizing.bind(this))
     }

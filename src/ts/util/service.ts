@@ -8,7 +8,7 @@ export function doConfirm(template: string) {
     const activeClass = 'modal-prompt--active'
 
     let cusRes: any;
-    const prm = new Promise((res, rej) => {
+    const prm = new Promise((res) => {
         cusRes = res;
     })
     let confirm = false;

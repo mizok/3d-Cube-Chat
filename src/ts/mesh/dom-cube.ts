@@ -35,7 +35,7 @@ export class DomCube {
         this.doAnimation();
     }
 
-    doAnimation() {
+    private doAnimation() {
         gsap.to(this.groupInner.rotation, cubeLikeConfig.startAnimationInnerRotationConfig)
         gsap.to(this.groupInner.scale, cubeLikeConfig.startAnimationInnerScalingConfig)
     }

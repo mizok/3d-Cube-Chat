@@ -8,13 +8,13 @@ export class Env {
         this.setLights();
     }
 
-    setLights() {
+    private setLights() {
         this.setAmbientLight();
         this.setDirectionalLight();
         this.setBackground();
     }
 
-    setDirectionalLight() {
+    private setDirectionalLight() {
         this.directionalLight = new DirectionalLight(0xffffff, 1);
         this.directionalLight.castShadow = true
         this.directionalLight.shadow.mapSize.set(2048, 2048)
@@ -23,12 +23,12 @@ export class Env {
         this.base.scene.add(this.directionalLight)
     }
 
-    setAmbientLight() {
+    private setAmbientLight() {
         this.ambientLight = new AmbientLight(0xffffff, 1);
         this.base.scene.add(this.ambientLight)
     }
 
-    setBackground() {
+    private setBackground() {
         this.base.scene.background = this.base.resources.gradientCubeTexture
 
     }

@@ -1,0 +1,87 @@
+.curtain-call {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgb(43, 43, 43);
+    opacity: 1;
+    transition: opacity 500ms 0.5s;
+    display: flex;
+
+    * {
+        user-select: none;
+    }
+
+    &--hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &__inner {
+        flex: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-family: 'Roboto Condensed';
+        color: $white;
+        opacity: 0.5;
+        transition: opacity 500ms;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    &__img {
+        width: 100px;
+
+        img {
+            width: 100%;
+            user-select: none;
+        }
+    }
+
+    &__img~&__title {
+        margin-top: 20px;
+    }
+
+    &__img~&__loading {
+        margin-top: 30px;
+    }
+
+    &__loading {
+        width: 200px;
+        height: 10px;
+        border-radius: 20px;
+        background-color: rgb(36, 36, 36);
+        overflow: hidden;
+        position: relative;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background-color: transparentize($white, 0.5);
+            transform: scaleX(0);
+            transition: transform 0.5s;
+            transform-origin: 0% 50%;
+        }
+    }
+
+    &--hide &__loading::before {
+        transform: scaleX(1);
+    }
+}

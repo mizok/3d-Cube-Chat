@@ -17,10 +17,11 @@ export class Base {
     renderer = new Renderer(this);
     playground = new Playground(this);
     touched = false;
-    touchedReactDelay = 2000;
     resources: {
         [key: string]: any
     }
+    private touchedReactDelay = 2000;
+
 
     constructor(public canvas: HTMLCanvasElement, public domCanvas: HTMLElement, public domBundle: HTMLElement) {
         this.initResizeMechanic();
@@ -28,14 +29,14 @@ export class Base {
         this.initTouchMechanic();
     }
 
-    initResizeMechanic() {
+    private initResizeMechanic() {
         this.sizer.on('resize', () => {
             this.renderer.resize();
             this.camera.resize();
         })
     }
 
-    initTickMechanic() {
+    private initTickMechanic() {
         this.ticker.on('tick', (clock: Clock) => {
             const delta = clock.getDelta();
             this.renderer.update();
@@ -45,7 +46,7 @@ export class Base {
     }
 
 
-    initTouchMechanic() {
+    private initTouchMechanic() {
         let startLocation = new Vector2();
         let endLocation = new Vector2();
         let timeout: any;

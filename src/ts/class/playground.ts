@@ -9,17 +9,23 @@ export class Playground extends EventEmitter {
     cube: Cube;
     domCube: DomCube;
     ready = false;
+    private initTimeout: any;
+    private initTimeoutDuration = 1000;
     constructor(private base: Base) {
         super();
         this.init();
     }
-    init() {
+    private init() {
         this.base.getResources().then(() => {
             this.env = new Env(this.base);
-            this.cube = new Cube(this.base);
-            this.domCube = new DomCube(this.base);
-            this.ready = true;
-            this.trigger('ready');
+            this.trigger('env-ready');
+            clearTimeout(this.initTimeout)
+            this.initTimeout = setTimeout(() => {
+                this.cube = new Cube(this.base);
+                this.domCube = new DomCube(this.base);
+                this.ready = true;
+                this.trigger('ready');
+            }, this.initTimeoutDuration)
         })
     }
 

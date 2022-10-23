@@ -11,7 +11,7 @@ export class Cube implements MeshType {
         this.setModel();
     }
 
-    createRoundedBoxGeo(width: number, height: number, depth: number, radius0: number, smoothness: number) {
+    private createRoundedBoxGeo(width: number, height: number, depth: number, radius0: number, smoothness: number) {
         let shape = new Shape();
         let eps = 0.00001;
         let radius = radius0 - eps;
@@ -53,7 +53,7 @@ export class Cube implements MeshType {
         this.doAnimation();
     }
 
-    doAnimation() {
+    private doAnimation() {
         gsap.to(this.mesh.rotation, cubeLikeConfig.startAnimationInnerRotationConfig)
         gsap.to(this.mesh.scale, cubeLikeConfig.startAnimationInnerScalingConfig)
     }
