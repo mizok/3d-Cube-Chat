@@ -17,7 +17,7 @@ It's basically a project which has:
 
 - Music panel : The music sources are from Soundcloud API, I don't have the copyright of them.
 - Chat panel : It's a chat that I built using `socket.io`.
-- Clock panel :　well, just a clock.
+- Clock panel : well, just a clock.
 
 Github Page: [https://mizok.github.io/3d-Cube-Chat/](https://mizok.github.io/3d-Cube-Chat/)
 
