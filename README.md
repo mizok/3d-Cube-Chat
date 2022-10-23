@@ -10,7 +10,7 @@ tags:
 
 ![](https://i.imgur.com/IlGZNOp.gif)
 
-[README(zh-tw)](https://github.com/mizok/3d-cube-chat/blob/main/README(zh-tw).md)
+[README(zh-tw)](https://github.com/mizok/3d-Cube-Chat/blob/master/README(zh-tw).md)
 ## Introduction
 
 It's basically a project which has:
