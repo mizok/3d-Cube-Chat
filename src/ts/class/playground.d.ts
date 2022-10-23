@@ -9,8 +9,10 @@ export declare class Playground extends EventEmitter {
     cube: Cube;
     domCube: DomCube;
     ready: boolean;
+    private initTimeout;
+    private initTimeoutDuration;
     constructor(base: Base);
-    init(): void;
+    private init;
     showChat(): void;
     showMusic(): void;
     update(delta: number): void;

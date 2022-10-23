@@ -12,8 +12,8 @@ export declare class Renderer {
     private scene2;
     private camera;
     constructor(base: Base);
-    setInstances(): void;
+    private setInstances;
     resize(): void;
-    sizing(): void;
+    private sizing;
     update(): void;
 }

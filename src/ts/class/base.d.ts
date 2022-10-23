@@ -15,14 +15,14 @@ export declare class Base {
     renderer: Renderer;
     playground: Playground;
     touched: boolean;
-    touchedReactDelay: number;
     resources: {
         [key: string]: any;
     };
+    private touchedReactDelay;
     constructor(canvas: HTMLCanvasElement, domCanvas: HTMLElement, domBundle: HTMLElement);
-    initResizeMechanic(): void;
-    initTickMechanic(): void;
-    initTouchMechanic(): void;
+    private initResizeMechanic;
+    private initTickMechanic;
+    private initTouchMechanic;
     setRotationLock(status: boolean): void;
     getRotationLockStatus(): boolean;
     setLoginStatus(status: boolean): void;

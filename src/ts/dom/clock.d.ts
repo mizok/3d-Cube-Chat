@@ -14,7 +14,7 @@ export declare class Clock implements FaceType {
     private timer;
     constructor(base: Base);
     setElement(): void;
-    updateClock(): void;
-    initClock(): void;
+    private updateClock;
+    private initClock;
     update(): void;
 }

@@ -11,8 +11,8 @@ export declare class Camera {
     private canvas;
     private scene;
     constructor(base: Base);
-    setInstance(): void;
-    setControls(): void;
+    private setInstance;
+    private setControls;
     resize(): void;
     update(): void;
 }

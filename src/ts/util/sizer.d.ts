@@ -5,6 +5,6 @@ export declare class Sizer extends EventEmitter {
     height: number;
     pixelRatio: number;
     constructor(canvas: HTMLCanvasElement);
-    initSizingMechanic(): void;
+    private initSizingMechanic;
     sizing(): void;
 }

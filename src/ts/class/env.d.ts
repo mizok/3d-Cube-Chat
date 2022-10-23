@@ -5,9 +5,9 @@ export declare class Env {
     ambientLight: AmbientLight;
     directionalLight: DirectionalLight;
     constructor(base: Base);
-    setLights(): void;
-    setDirectionalLight(): void;
-    setAmbientLight(): void;
-    setBackground(): void;
+    private setLights;
+    private setDirectionalLight;
+    private setAmbientLight;
+    private setBackground;
     update(delta: number): void;
 }

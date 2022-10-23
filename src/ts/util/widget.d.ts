@@ -3,7 +3,7 @@ declare const SoundcloudWidget: any;
 declare class SCWidget extends EventEmitter {
     instance: typeof SoundcloudWidget;
     constructor(iframeEle: HTMLIFrameElement);
-    init(): void;
+    private init;
     play(): void;
     pause(): void;
     toggle(): void;

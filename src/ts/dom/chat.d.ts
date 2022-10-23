@@ -24,7 +24,7 @@ export declare class Chat extends EventEmitter implements FaceType {
         username: string;
         id: string;
     }[]): void;
-    bindElementEvents(): void;
+    private bindElementEvents;
     setGuestNumber(data: number): void;
     update(): void;
 }

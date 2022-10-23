@@ -14,7 +14,7 @@ export declare class DomCube {
     groupInner: Group;
     constructor(base: Base);
     init(): void;
-    doAnimation(): void;
+    private doAnimation;
     showChat(): void;
     showMusic(): void;
     update(delta: number): void;
