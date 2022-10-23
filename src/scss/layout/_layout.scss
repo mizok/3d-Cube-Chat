@@ -5,6 +5,10 @@ $chatWidthMobile: 300px;
   height: 100%;
   width: 100%;
   overflow: hidden;
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top: 0;
 
   &__inner {
     display: flex;
