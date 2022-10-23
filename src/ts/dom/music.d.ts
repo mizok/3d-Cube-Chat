@@ -12,7 +12,12 @@ export declare class Music implements FaceType {
     private cPos;
     private m4;
     private timer;
+    private defaultSource;
+    private playStatus;
+    private waveformInstance;
     constructor(base: Base);
     setElement(): void;
+    private bindPlayerUIEvent;
+    private init;
     update(): void;
 }

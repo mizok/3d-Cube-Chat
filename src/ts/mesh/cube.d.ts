@@ -10,5 +10,6 @@ export declare class Cube implements MeshType {
     setModel(): void;
     doAnimation(): void;
     showChat(): void;
+    showMusic(): void;
     update(delta: number): void;
 }
