@@ -39,6 +39,7 @@ export class Music implements FaceType {
         const banner = this.element.querySelector('#music-player-img img') as HTMLImageElement;
         const title = this.element.querySelector('#music-player-title span');
         const artist = this.element.querySelector('#music-player-artist span');
+        const permaLink = this.element.querySelector('#music-player-perma-link') as HTMLAnchorElement;
         const waveform = this.element.querySelector('#music-player-waveform') as HTMLElement;
         const waveformRect = waveform.getBoundingClientRect();
         const contrastFactor = 5;
@@ -66,6 +67,11 @@ export class Music implements FaceType {
             this.waveformInstance.pause();
         })
 
+        permaLink.addEventListener('pointerdown', (e) => {
+            const href = (e.currentTarget as HTMLAnchorElement).href;
+            window.open(href, '_blank');
+        })
+
 
         widget.on('play-progress', (percent: number) => {
             if (!this.waveformInstance) return;
@@ -74,6 +80,7 @@ export class Music implements FaceType {
 
 
         widget.on('load', (soundObject: any) => {
+
             let picUrl = '';
             if (!!soundObject.artwork_url) {
                 picUrl = soundObject.artwork_url.replace(/(.*)(-large)(\.[a-z0-9]{3}[a-z0-9]?)$/, '$1-t500x500$3')
@@ -81,19 +88,22 @@ export class Music implements FaceType {
             else {
                 picUrl = './assets/images/not-found.jpg';
             }
-            //圖片
+            //image
             banner.src = picUrl
-            //標題
-            title.innerHTML = soundObject.title
-            //藝術家
-            artist.innerHTML = soundObject.publisher_metadata?.artist || 'Unknown';
+            //title
+            title.innerHTML = soundObject?.title
+            //artist
+            artist.innerHTML = soundObject?.publisher_metadata?.artist || 'Unknown';
+            //soundcloud link
+            permaLink.href = soundObject?.permalink_url;
 
+            //get waveform data and render waveform diagram
             axios({
                 url: soundObject.waveform_url
             })
                 .then((res: any) => {
                     waveform.innerHTML = '';
-                    // 做一些基本的對比度運算
+                    // some contrast calculation 
                     const data = res.data.samples.map((val: number) => ((val - contrastOffset) / 100) * contrastFactor + contrastOffset / 100);
                     this.waveformInstance = new Waveform(
                         {

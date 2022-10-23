@@ -94,7 +94,7 @@ export function searchMusic(): Promise<false | string> {
             });
 
             const embedableTracks = searchResult?.collection.filter((o: any) => {
-                return o.embeddable_by === 'all'
+                return o.embeddable_by === 'all' && !!o.title
             })
             const htmlBundle = embedableTracks.map((o: any, index: number) => {
                 return `
