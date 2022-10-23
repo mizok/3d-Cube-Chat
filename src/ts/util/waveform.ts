@@ -1,3 +1,5 @@
+/*This is a modified version of https://github.com/samcrosoft/waveformjs, the original one is written in coffee script, and I rewrite it into typescript*/
+
 import { EventEmitter } from "./event-emitter";
 
 interface WaveformOptions {
@@ -200,8 +202,6 @@ export class Waveform extends EventEmitter {
     this.active = this.calcPercent();
     this.redraw();
   };
-
-
 
   private bindContainerResize() {
     window.addEventListener("resize", () => {

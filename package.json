@@ -67,8 +67,7 @@
     "socket.io-client": "^4.5.2",
     "soundcloud-key-fetch": "^1.0.13",
     "soundcloud-widget": "^0.2.1",
-    "three": "^0.145.0",
-    "waveformjs": "^1.0.1"
+    "three": "^0.145.0"
   },
   "browserslist": [
     "last 2 version",
