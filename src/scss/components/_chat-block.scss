@@ -207,18 +207,11 @@
 
   }
 
-
-
-
-
   &__header {
     flex: none;
     padding: 20px;
     box-shadow: -1px 3px 27px 0px rgba(0, 0, 0, 0.75);
   }
-
-
-
 
   &__body {
     flex: 1;
@@ -238,8 +231,20 @@
     box-shadow: 1px -7px 19px -4px rgba(0, 0, 0, 0.35);
   }
 
+  &__input {
+    @include rwd($screen-pad-portrait) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
   &__author {
     height: 50px;
+
+    @include rwd($screen-pad-portrait) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 
 
