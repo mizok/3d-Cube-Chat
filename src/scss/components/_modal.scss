@@ -201,7 +201,7 @@ xpopup
 
         @include rwd($screen-pad-portrait) {
             padding-left: 20px;
-            padding-right: 10px;
+            padding-right: 20px;
         }
 
 
@@ -350,6 +350,7 @@ xpopup
         opacity: 0.5;
     }
 
+
     &__title {
         position: relative;
         display: inline-flex;
@@ -376,15 +377,15 @@ xpopup
 
     &:hover &__title {
         opacity: 0.75;
+    }
 
+    &__title:hover {
         @include rwd($screen-pad-portrait) {
-
             span {
                 text-overflow: clip;
                 overflow: visible;
                 display: inline-block;
                 animation: marquee 10s linear infinite;
-                animation-delay: 1s;
             }
 
         }
