@@ -96,7 +96,6 @@ xpopup
         height: calc(100% - 100px);
         max-width: 1024px;
         max-height: 1024px;
-        overflow: hidden;
         margin: auto;
         top: 0;
         bottom: 0;
@@ -142,6 +141,8 @@ xpopup
     &__header {
         padding: 30px;
         background-color: rgba(128, 128, 128, 0.482);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
 
         @include rwd($screen-pad-portrait) {
             padding: 20px;
