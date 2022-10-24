@@ -130,7 +130,6 @@ export function searchMusic(): Promise<false | string> {
     }
 
     const cb = async (e: MouseEvent) => {
-        e.preventDefault();
         const actionTarget = (e.target as HTMLElement).closest('[action]') || (e.target as HTMLElement);
         const action = actionTarget.getAttribute('action');
         if (action === 'close') {
@@ -149,7 +148,6 @@ export function searchMusic(): Promise<false | string> {
             frame.classList.remove(activeClass);
             cusRes(chosenId);
         }
-
     }
 
     frame.classList.add(activeClass);
