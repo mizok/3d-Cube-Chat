@@ -107,13 +107,35 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-image: url(~@img/play-alpha.svg);
         background-size: cover;
         cursor: pointer;
         transition: box-shadow 1s, opacity 500ms;
         opacity: 0.75;
         background-color: transparent;
         border: none;
+        position: relative;
+
+        &:before,
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-size: cover;
+            transition: opacity 500ms;
+        }
+
+        &:before {
+            background-image: url(~@img/play-alpha.svg);
+        }
+
+        &:after {
+            background-image: url(~@img/pause-alpha.svg);
+            opacity: 0;
+        }
 
         @include hasHover() {
             &:hover {
@@ -123,8 +145,12 @@
             }
         }
 
-        &--pause {
-            background-image: url(~@img/pause-alpha.svg);
+        &--pause::before {
+            opacity: 0;
+        }
+
+        &--pause::after {
+            opacity: 1;
         }
     }
 
