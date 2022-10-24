@@ -67,17 +67,22 @@ xpopup
             border-radius: 0 0 0 .25em;
         }
 
-        li:first-child a:hover {
-            background-color: #656565;
+        @include hasHover() {
+            li:first-child a:hover {
+                background-color: #656565;
+            }
         }
+
 
         li:last-child a {
             background: #9b9b9b;
             border-radius: 0 0 .25em 0;
         }
 
-        li:last-child a:hover {
-            background-color: #8d8d8d;
+        @include hasHover() {
+            li:last-child a:hover {
+                background-color: #8d8d8d;
+            }
         }
     }
 }
@@ -301,8 +306,10 @@ xpopup
         }
     }
 
-    &:hover &__img {
-        opacity: 1;
+    @include hasHover() {
+        &:hover &__img {
+            opacity: 1;
+        }
     }
 
     &__head {
@@ -346,8 +353,10 @@ xpopup
         cursor: pointer;
     }
 
-    &:hover &__play {
-        opacity: 0.5;
+    @include hasHover() {
+        &:hover &__play {
+            opacity: 0.5;
+        }
     }
 
 
@@ -374,20 +383,23 @@ xpopup
         }
     }
 
-
-    &:hover &__title {
-        opacity: 0.75;
+    @include hasHover() {
+        &:hover &__title {
+            opacity: 0.75;
+        }
     }
 
-    &__title:hover {
-        @include rwd($screen-pad-portrait) {
-            span {
-                text-overflow: clip;
-                overflow: visible;
-                display: inline-block;
-                animation: marquee 10s linear infinite;
-            }
+    @include hasHover() {
+        &__title:hover {
+            @include rwd($screen-pad-portrait) {
+                span {
+                    text-overflow: clip;
+                    overflow: visible;
+                    display: inline-block;
+                    animation: marquee 10s linear infinite;
+                }
 
+            }
         }
     }
 
@@ -421,10 +433,12 @@ xpopup
     }
 
 
+    @include hasHover() {
 
-    &:hover &__artist,
-    &:hover &__album-title {
-        opacity: 0.75;
+        &:hover &__artist,
+        &:hover &__album-title {
+            opacity: 0.75;
+        }
     }
 
     &__artist+&__album-title:not(:empty) {

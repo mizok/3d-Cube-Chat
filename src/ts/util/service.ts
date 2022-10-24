@@ -1,7 +1,9 @@
 import { widget } from '../util/widget'
 import { SoundCloudService } from './soundcloud-service';
+const isMobile = require('is-mobile')
 const soundCloudService = new SoundCloudService({ clientId: 'jOJjarVXJfZlI309Up55k93EUDG7ILW6' })
 
+export const pointerEvent = isMobile() ? 'touchstart' : 'click';
 
 export function doConfirm(template: string) {
     const frame = document.querySelector('#modal-confirm');
@@ -27,14 +29,14 @@ export function doConfirm(template: string) {
                 frame.classList.remove(activeClass);
                 break;
         }
-        e.currentTarget.removeEventListener('click', cb);
+        e.currentTarget.removeEventListener(pointerEvent, cb);
         cusRes(confirm)
     }
 
     frame.querySelector('p').innerHTML = template;
     //show frame;
     frame.classList.add(activeClass);
-    frame.addEventListener('click', cb);
+    frame.addEventListener(pointerEvent, cb);
     return prm;
 }
 
@@ -46,7 +48,7 @@ export function doAlert(template: string) {
         e.preventDefault();
         const action = (e.target as HTMLElement).closest('[action]').getAttribute('action');
         if (action === 'close') {
-            e.currentTarget.removeEventListener('click', cb);
+            e.currentTarget.removeEventListener(pointerEvent, cb);
             frame.classList.remove(activeClass);
         }
 
@@ -55,7 +57,7 @@ export function doAlert(template: string) {
     frame.querySelector('p').innerHTML = template;
     //show frame;
     frame.classList.add(activeClass);
-    frame.addEventListener('click', cb);
+    frame.addEventListener(pointerEvent, cb);
 }
 
 async function renderSearchView(frame: Element, keywordInput: HTMLInputElement) {
@@ -132,7 +134,7 @@ export function searchMusic(): Promise<false | string> {
         const actionTarget = (e.target as HTMLElement).closest('[action]') || (e.target as HTMLElement);
         const action = actionTarget.getAttribute('action');
         if (action === 'close') {
-            e.currentTarget.removeEventListener('click', cb);
+            e.currentTarget.removeEventListener(pointerEvent, cb);
             document.removeEventListener('keydown', keydownCallback);
             frame.classList.remove(activeClass);
             cusRes(false);
@@ -142,7 +144,7 @@ export function searchMusic(): Promise<false | string> {
         }
         else if (action === 'choose') {
             chosenId = actionTarget.getAttribute('data-id') || '';
-            e.currentTarget.removeEventListener('click', cb);
+            e.currentTarget.removeEventListener(pointerEvent, cb);
             document.removeEventListener('keydown', keydownCallback);
             frame.classList.remove(activeClass);
             cusRes(chosenId);
@@ -151,7 +153,7 @@ export function searchMusic(): Promise<false | string> {
     }
 
     frame.classList.add(activeClass);
-    frame.addEventListener('click', cb);
+    frame.addEventListener(pointerEvent, cb);
     document.addEventListener('keydown', keydownCallback);
     return prm;
 }
@@ -164,3 +166,6 @@ export function playViaIframe(trackId: string) {
         }
     )
 }
+
+
+

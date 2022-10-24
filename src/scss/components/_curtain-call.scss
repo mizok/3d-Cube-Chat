@@ -36,9 +36,12 @@
         opacity: 0.5;
         transition: opacity 500ms;
 
-        &:hover {
-            opacity: 0.75;
+        @include hasHover() {
+            &:hover {
+                opacity: 0.75;
+            }
         }
+
     }
 
     &__img {

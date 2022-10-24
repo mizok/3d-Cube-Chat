@@ -1,7 +1,10 @@
 .clock {
-    &:hover {
-        opacity: 0.75;
+    @include hasHover() {
+        &:hover {
+            opacity: 0.75;
+        }
     }
+
 
     * {
         font-family: 'Silkscreen';

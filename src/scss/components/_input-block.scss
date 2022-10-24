@@ -58,8 +58,11 @@ $input-text-active: #BFD2FF;
     cursor: pointer;
     font-size: 0;
 
-    &:hover {
-      opacity: 0.75;
+    @include hasHover() {
+      &:hover {
+        opacity: 0.75;
+      }
     }
+
   }
 }

@@ -3,7 +3,8 @@ import { io, Socket } from 'socket.io-client';
 import { trim } from 'lodash';
 import { ShowScreenTargets } from './interface';
 import { createElementFromHTML } from './util/function';
-import { doAlert, doConfirm, playViaIframe, searchMusic } from './util/service';
+import { doAlert, doConfirm, playViaIframe, pointerEvent, searchMusic } from './util/service';
+
 class Main extends Base {
     private wrapper: Element = document.querySelector('#wrapper');
     private chatBlock: Element = document.querySelector('#chat-block');
@@ -99,7 +100,7 @@ class Main extends Base {
 
         }
 
-        toggler.addEventListener('click', panelToggle)
+        toggler.addEventListener(pointerEvent, panelToggle)
 
         this.playground.on('ready', () => {
             this.playground.domCube.chat.showScreen('loginGuide');
@@ -110,9 +111,9 @@ class Main extends Base {
         })
 
 
-        this.rotationLock.addEventListener('click', this.toggleRotationLockFromUI.bind(this))
+        this.rotationLock.addEventListener(pointerEvent, this.toggleRotationLockFromUI.bind(this))
 
-        loginBtn.addEventListener('click', () => {
+        loginBtn.addEventListener(pointerEvent, () => {
             this.myName = trim((this.chatBlock.querySelector('#login-name') as HTMLInputElement).value);
             if (this.myName) {
                 /*發送事件*/
@@ -124,11 +125,11 @@ class Main extends Base {
             }
         })
 
-        sendBtn.addEventListener('click', () => {
+        sendBtn.addEventListener(pointerEvent, () => {
             this.sendMessage();
         })
 
-        logoutBtn.addEventListener('click', async () => {
+        logoutBtn.addEventListener(pointerEvent, async () => {
             let leave = await doConfirm('Are you sure you want to leave the chat?')
             if (leave) {
                 /*觸發 logout 事件*/
@@ -150,7 +151,7 @@ class Main extends Base {
         const musicBtn = this.chatBlock.querySelector('#search-music-button');
         let stopRotationTimeOut: any;
 
-        musicBtn.addEventListener('click', async () => {
+        musicBtn.addEventListener(pointerEvent, async () => {
 
             this.setRotationLockFromUI(true);
             this.playground.showMusic();

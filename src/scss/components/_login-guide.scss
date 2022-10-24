@@ -26,9 +26,12 @@
         opacity: 0.5;
         cursor: pointer;
 
-        &:hover {
-            opacity: 0.75;
+        @include hasHover() {
+            &:hover {
+                opacity: 0.75;
+            }
         }
+
     }
 
 }

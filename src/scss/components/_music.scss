@@ -22,8 +22,10 @@
     border: 3px solid #ff5500;
     display: flex;
 
-    &:hover {
-        opacity: 0.5;
+    @include hasHover() {
+        &:hover {
+            opacity: 0.5;
+        }
     }
 
     &__inner {
@@ -113,10 +115,12 @@
         background-color: transparent;
         border: none;
 
-        &:hover {
-            box-shadow:
-                6.7px 6.7px 5.3px rgba(0, 0, 0, 0.1);
-            opacity: 1;
+        @include hasHover() {
+            &:hover {
+                box-shadow:
+                    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.1);
+                opacity: 1;
+            }
         }
 
         &--pause {
@@ -142,9 +146,11 @@
             width: 100%;
         }
 
-        &:hover span {
-            animation: marquee 10s linear infinite;
-            animation-delay: 1s;
+        @include hasHover() {
+            &:hover span {
+                animation: marquee 10s linear infinite;
+                animation-delay: 1s;
+            }
         }
     }
 

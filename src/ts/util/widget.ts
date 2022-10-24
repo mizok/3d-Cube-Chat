@@ -36,7 +36,7 @@ class SCWidget extends EventEmitter {
         this.instance.seekTo(millisecond)
     }
     load(url: string) {
-        return this.instance.load(url, { auto_play: true }).then(() => {
+        return this.instance.load(url, { auto_play: false }).then(() => {
             this.instance.getCurrentSound().then((soundObject: any) => {
                 this.trigger('load', [soundObject])
             })

@@ -82,8 +82,10 @@
     @include toggler();
   }
 
-  &__toggler:hover::before {
-    opacity: 0.75;
+  @include hasHover() {
+    &__toggler:hover::before {
+      opacity: 0.75;
+    }
   }
 
   &__rotation-lock {
@@ -184,8 +186,7 @@
   }
 
 
-  &__rotation-lock--active,
-  &__rotation-lock:hover {
+  &__rotation-lock--active {
     background-color: gray;
     opacity: 0.5;
 
@@ -197,14 +198,35 @@
       transform: rotate(-180deg)
     }
 
-    &:hover {
-      opacity: 1;
+  }
+
+  @include hasHover() {
+    &__rotation-lock:hover {
+      background-color: gray;
+      opacity: 0.5;
+
+      &:before {
+        opacity: 0;
+      }
+
+      &:after {
+        transform: rotate(-180deg)
+      }
+    }
+  }
+
+  @include hasHover() {
+    &__search-music-button:hover {
+
+      >*,
+      &:before {
+        opacity: 0.75;
+      }
     }
   }
 
 
-  &__search-music-button--active,
-  &__search-music-button:hover {
+  &__search-music-button--active {
 
     >*,
     &:before {
@@ -276,9 +298,12 @@
     }
   }
 
-  &__avatar:hover {
-    opacity: 0.75;
+  @include hasHover() {
+    &__avatar:hover {
+      opacity: 0.75;
+    }
   }
+
 
   &__avatar+&__name {
     margin-left: 20px;
@@ -316,9 +341,12 @@
       margin-left: 15px;
     }
 
-    &:hover {
-      opacity: 0.75;
+    @include hasHover() {
+      &:hover {
+        opacity: 0.75;
+      }
     }
+
   }
 }
 
@@ -411,9 +439,12 @@
     transition: opacity 500ms;
     word-break: break-all;
 
-    &:hover {
-      opacity: 1;
+    @include hasHover() {
+      &:hover {
+        opacity: 1;
+      }
     }
+
   }
 
   &--cube &__bubble {
