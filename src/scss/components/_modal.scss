@@ -96,6 +96,7 @@ xpopup
         height: calc(100% - 100px);
         max-width: 1024px;
         max-height: 1024px;
+        overflow: hidden;
         margin: auto;
         top: 0;
         bottom: 0;
