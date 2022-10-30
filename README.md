@@ -23,4 +23,4 @@ Github Page: [https://mizok.github.io/3d-Cube-Chat/](https://mizok.github.io/3d-
 
 ## Can I take this for commercial use?
 
-Sorry, but NO, this repository is under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/), so you shall not use this in ANY commercial use.
+Sorry, but NO, this repository is under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/), so you shall not use this in ANY commercial case.
