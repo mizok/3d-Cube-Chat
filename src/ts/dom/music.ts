@@ -80,7 +80,6 @@ export class Music implements FaceType {
 
 
         widget.on('load', (soundObject: any) => {
-            console.log(soundObject);
             let picUrl = '';
             if (!!soundObject.artwork_url) {
                 picUrl = soundObject.artwork_url.replace(/(.*)(-large)(\.[a-z0-9]{3}[a-z0-9]?)$/, '$1-t500x500$3')
