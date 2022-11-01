@@ -80,7 +80,7 @@ export class Music implements FaceType {
 
 
         widget.on('load', (soundObject: any) => {
-
+            console.log(soundObject);
             let picUrl = '';
             if (!!soundObject.artwork_url) {
                 picUrl = soundObject.artwork_url.replace(/(.*)(-large)(\.[a-z0-9]{3}[a-z0-9]?)$/, '$1-t500x500$3')
@@ -122,7 +122,9 @@ export class Music implements FaceType {
                     this.waveformInstance.on(EVENT_CLICK, (percent: number) => {
                         const porpotion = percent / 100;
                         widget.seek(porpotion * soundObject?.duration);
+                        widget.play()
                         this.waveformInstance.playProgress(percent);
+
                     });
                 })
                 .catch((err: any) => { throw err });
