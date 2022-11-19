@@ -1,7 +1,7 @@
 import { widget } from '../util/widget'
 import { SoundCloudService } from './soundcloud-service';
 const isMobile = require('is-mobile')
-const soundCloudService = new SoundCloudService({ clientId: 'jOJjarVXJfZlI309Up55k93EUDG7ILW6' })
+const soundCloudService = new SoundCloudService({ clientId: '8m4K5d2x4mNmUHLhLmsGq9vxE3dDkxCm' })
 
 export const pointerEvent = isMobile() ? 'touchstart' : 'click';
 
